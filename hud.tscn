@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://onj4cnrlqutm"]
+
+[ext_resource type="Script" uid="uid://ttgiyauxwaxi" path="res://hud.gd" id="1_37p78"]
+
+[node name="HUD" type="CanvasLayer" unique_id=2066656993]
+script = ExtResource("1_37p78")
+
+[node name="Move" type="Button" parent="." unique_id=2071848066]
+anchors_preset = -1
+anchor_left = 0.42800003
+anchor_top = 1.0
+anchor_right = 0.42800003
+anchor_bottom = 1.0
+offset_left = -43.05603
+offset_top = -50.0
+offset_right = 36.94397
+grow_horizontal = 2
+grow_vertical = 0
+toggle_mode = true
+text = "Move"
+
+[node name="Attack1" type="Button" parent="." unique_id=760958473]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -50.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Attack1"
+
+[node name="Attack2" type="Button" parent="." unique_id=250128783]
+anchors_preset = -1
+anchor_left = 0.574
+anchor_top = 1.0
+anchor_right = 0.574
+anchor_bottom = 1.0
+offset_left = -39.247986
+offset_top = -50.0
+offset_right = 40.752014
+grow_horizontal = 2
+grow_vertical = 0
+text = "Attack2"
+
+[node name="EndTurn" type="Button" parent="." unique_id=1277784263]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -59.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "End Turn"
+
+[connection signal="pressed" from="Move" to="." method="_on_move_pressed"]
+[connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]

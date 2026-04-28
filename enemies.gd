@@ -17,6 +17,7 @@ var intent = false
 
 #How each enemy takes its turn, its movement logic is basically the same as the player except its target is the player
 func take_turn():
+	turn_finished = false
 	#print("take_turn running")
 	#This code probably could be optimized by using process mode enable and disable but that breaks things so ill leave it as is
 	var player = get_tree().get_first_node_in_group("player_units")
@@ -32,7 +33,7 @@ func take_turn():
 	if id_path.is_empty() == false:
 		current_id_path = id_path
 	attack_area(player.global_position) #does nothing right now
-	turn_finished = true
+	
 	
 func attack_area(player_position):
 	target_tile = level_root.tile_map.local_to_map(player_position)
@@ -42,7 +43,9 @@ func attack_area(player_position):
 #Exact same as players
 func _physics_process(delta):
 	if current_id_path.is_empty():
+		turn_finished = true
 		return
+		
 	var target_position = level_root.tile_map.map_to_local(current_id_path.front())
 	
 	global_position = global_position.move_toward(target_position, 2)

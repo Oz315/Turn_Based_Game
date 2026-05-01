@@ -46,10 +46,7 @@ func take_turn():
 	
 	if id_path.is_empty() == false:
 		current_id_path = id_path
-	
-	
 	#attack_area(player.global_position) #does nothing right now
-	
 
 func first_playable_attack(player: Node2D):
 	var action_ctx = level_root.get_action_context()
@@ -84,13 +81,15 @@ func _physics_process(delta):
 		
 	var target_position = level_root.tile_map.map_to_local(current_id_path.front())
 	
-	if level_root.occupancy.get(current_id_path.front()) != null:
-		current_id_path.clear()
-		turn_finished = true
-		return
+
 	
 	global_position = global_position.move_toward(target_position, 2)
 	
 	if global_position == target_position:
 		SignalBus.any_moved.emit()
 		current_id_path.pop_front()
+		
+		if level_root.occupancy.get(current_id_path.front()) != null:
+			current_id_path.clear()
+			turn_finished = true
+			return

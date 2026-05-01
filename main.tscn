@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://tnsa4cdericw"]
+
+[ext_resource type="Script" uid="uid://dgdjkgny6e7eh" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://onj4cnrlqutm" path="res://hud.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cbnyytx41532c" path="res://turn_queue.gd" id="3_1bvp3"]
+
+[node name="Main" type="Node2D" unique_id=1108824690]
+script = ExtResource("1_1bvp3")
+
+[node name="Levels" type="Node2D" parent="." unique_id=652559717]
+
+[node name="TurnQueue" type="Node2D" parent="." unique_id=2141613066]
+script = ExtResource("3_1bvp3")
+
+[node name="HUD" parent="." unique_id=2066656993 instance=ExtResource("1_ig7tw")]

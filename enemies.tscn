@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://42ssi35bexms"]
+
+[ext_resource type="Script" uid="uid://xrqv2i1ngkvo" path="res://enemies.gd" id="1_g5tt5"]
+[ext_resource type="Texture2D" uid="uid://b3v4h1732e5sn" path="res://tiles/pixil-frame-0.png" id="1_gu34h"]
+
+[node name="Enemies" type="Node2D" unique_id=184206467 groups=["enemy_units"]]
+script = ExtResource("1_g5tt5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1977063900]
+texture = ExtResource("1_gu34h")
+region_enabled = true
+region_rect = Rect2(64, 32, 32, 32)

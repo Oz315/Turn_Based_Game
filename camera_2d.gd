@@ -1,0 +1,33 @@
+extends Camera2D
+
+#This is just for a moveable camera, it shouldn't have to interact with anything else 
+#unless we want it to lock on to enemies when they take their turn
+#we can also make it so that the camera has custom borders for each level so the player can't see
+#off the level but we'd have to have more finalized levels before we start doing that
+var _target_zoom: float = 1.0
+const MIN_ZOOM: float = 0.8
+const MAX_ZOOM: float = 2.0
+const ZOOM_INCREMENT = 0.1
+const ZOOM_RATE: float = 8.0
+
+func _physics_process(delta: float):
+	zoom = lerp(zoom, _target_zoom * Vector2.ONE, ZOOM_RATE * delta)
+	
+func zoom_in():
+	_target_zoom = min(_target_zoom + ZOOM_INCREMENT, MAX_ZOOM)
+	set_physics_process(true)
+
+func zoom_out():
+	_target_zoom = max(_target_zoom - ZOOM_INCREMENT, MIN_ZOOM)
+	set_physics_process(true)
+	
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
+			position -= event.relative / zoom
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				zoom_in()
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				zoom_out()

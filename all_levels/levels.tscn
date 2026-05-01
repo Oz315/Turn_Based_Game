@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dhu7wys2v8med"]
+
+[ext_resource type="TileSet" uid="uid://ndp2wka132ci" path="res://tiles/overlay.tres" id="1_02xe8"]
+[ext_resource type="TileSet" uid="uid://cwxvo1memmj6i" path="res://tiles/maintiles.tres" id="1_48rmr"]
+[ext_resource type="Script" uid="uid://bimxsrivsu7t8" path="res://levels.gd" id="1_xv4fl"]
+
+[node name="Levels" type="Node2D" unique_id=1950013390]
+script = ExtResource("1_xv4fl")
+
+[node name="MapTiles" type="Node2D" parent="." unique_id=725616004]
+
+[node name="MoveOverlay" type="TileMapLayer" parent="MapTiles" unique_id=152380564]
+unique_name_in_owner = true
+visibility_layer = 513
+z_index = 3
+tile_set = ExtResource("1_02xe8")
+
+[node name="Background" type="TileMapLayer" parent="MapTiles" unique_id=873117621]
+unique_name_in_owner = true
+tile_set = ExtResource("1_48rmr")
+
+[node name="Ground" type="TileMapLayer" parent="MapTiles" unique_id=364663810]
+unique_name_in_owner = true
+tile_set = ExtResource("1_48rmr")
+
+[node name="Water" type="TileMapLayer" parent="MapTiles" unique_id=406526636]
+unique_name_in_owner = true
+tile_set = ExtResource("1_48rmr")
+
+[node name="Units" type="Node2D" parent="." unique_id=841793513]

@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" format=3 uid="uid://ndp2wka132ci"]
+
+[ext_resource type="Texture2D" uid="uid://lcu3ghuulqnw" path="res://tiles/pixil-frame-0 (1).png" id="1_ki2m8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xv4fl"]
+texture = ExtResource("1_ki2m8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_xv4fl")

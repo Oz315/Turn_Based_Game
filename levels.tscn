@@ -5,6 +5,10 @@
 [ext_resource type="Script" uid="uid://bimxsrivsu7t8" path="res://levels.gd" id="1_xv4fl"]
 [ext_resource type="PackedScene" uid="uid://d07g2jscftu7p" path="res://player.tscn" id="2_hbfth"]
 [ext_resource type="PackedScene" uid="uid://42ssi35bexms" path="res://enemies.tscn" id="3_02xe8"]
+[ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/turn_action.gd" id="5_x8mww"]
+[ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="6_x8mww"]
+[ext_resource type="Resource" uid="uid://bn5h3kqu77hvj" path="res://actions/big_attack.tres" id="7_ci5qh"]
+[ext_resource type="Resource" uid="uid://dwh6kmee6x2hf" path="res://actions/jump_attack.tres" id="9_04tao"]
 
 [node name="Levels" type="Node2D" unique_id=1950013390]
 script = ExtResource("1_xv4fl")
@@ -32,14 +36,17 @@ tile_set = ExtResource("1_48rmr")
 
 [node name="Player" parent="Level1/Friendly" unique_id=2078899362 instance=ExtResource("2_hbfth")]
 position = Vector2(16, -16)
+available_actions = Array[ExtResource("5_x8mww")]([ExtResource("6_x8mww"), ExtResource("7_ci5qh"), ExtResource("9_04tao")])
 
 [node name="Enemies" type="Node2D" parent="Level1" unique_id=1742617855]
 
 [node name="Enemy1" parent="Level1/Enemies" unique_id=184206467 instance=ExtResource("3_02xe8")]
 position = Vector2(625, -16)
+available_actions = Array[ExtResource("5_x8mww")]([ExtResource("6_x8mww"), ExtResource("9_04tao")])
 
 [node name="Enemy2" parent="Level1/Enemies" unique_id=812875485 instance=ExtResource("3_02xe8")]
 position = Vector2(142, -16)
+available_actions = Array[ExtResource("5_x8mww")]([ExtResource("7_ci5qh")])
 
 [node name="Level2" type="Node2D" parent="." unique_id=1954041748]
 visible = false

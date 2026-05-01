@@ -13,6 +13,7 @@ func enemies_turn():
 	#print("turnqueue: found ", enemies.size(), " enemies")
 	for enemy in active_enemies:
 		enemy.turn_finished = false
+		get_parent().get_node("Levels").update_occupancy()
 		enemy.take_turn()
 		while not enemy.turn_finished:
 			await get_tree().process_frame #just wait until enemy finished turn
@@ -22,9 +23,13 @@ func enemies_turn():
 
 # now tell the player its their turn
 func player_turn():
+	
 	get_parent().get_node("HUD").lock_ui(false)
+	
 	var all_players = get_tree().get_nodes_in_group("player_units")
 	#again, there should be a better way of only selecting the current level's player
 	for player in all_players:
 		if player.is_visible_in_tree():
+			get_parent().get_node("HUD").display_actions(player.available_actions)
+			get_parent().get_node("Levels").update_occupancy()
 			player.new_turn()

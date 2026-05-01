@@ -20,6 +20,7 @@ toggle_mode = true
 text = "Move"
 
 [node name="Attack1" type="Button" parent="." unique_id=760958473]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -33,6 +34,7 @@ grow_vertical = 0
 text = "Attack1"
 
 [node name="Attack2" type="Button" parent="." unique_id=250128783]
+visible = false
 anchors_preset = -1
 anchor_left = 0.574
 anchor_top = 1.0
@@ -56,6 +58,12 @@ offset_top = -59.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Turn"
+
+[node name="ActionContainer" type="HBoxContainer" parent="." unique_id=2087259039]
+offset_left = 558.0
+offset_top = 593.0
+offset_right = 1044.0
+offset_bottom = 646.0
 
 [connection signal="pressed" from="Move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]

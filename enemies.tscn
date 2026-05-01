@@ -2,11 +2,84 @@
 
 [ext_resource type="Script" uid="uid://xrqv2i1ngkvo" path="res://enemies.gd" id="1_g5tt5"]
 [ext_resource type="Texture2D" uid="uid://b3v4h1732e5sn" path="res://tiles/pixil-frame-0.png" id="1_gu34h"]
+[ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/turn_action.gd" id="2_1v8mu"]
+[ext_resource type="Script" uid="uid://biwh13lhnk8nb" path="res://actions/melee.gd" id="3_e0nqx"]
+[ext_resource type="Script" uid="uid://drmdh0qd0ex7d" path="res://grid_position_component.gd" id="3_fqt3r"]
+
+[sub_resource type="Resource" id="Resource_ke61e"]
+script = ExtResource("3_e0nqx")
+metadata/_custom_type_script = "uid://biwh13lhnk8nb"
+
+[sub_resource type="Animation" id="Animation_1v8mu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_e0nqx"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.7574729, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_emit_animation_strike"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ke61e"]
+_data = {
+&"RESET": SubResource("Animation_1v8mu"),
+&"attack": SubResource("Animation_e0nqx")
+}
 
 [node name="Enemies" type="Node2D" unique_id=184206467 groups=["enemy_units"]]
 script = ExtResource("1_g5tt5")
+available_actions = Array[ExtResource("2_1v8mu")]([SubResource("Resource_ke61e")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1977063900]
 texture = ExtResource("1_gu34h")
 region_enabled = true
 region_rect = Rect2(64, 32, 32, 32)
+
+[node name="GridPositionComponent" type="Node2D" parent="." unique_id=331504907]
+script = ExtResource("3_fqt3r")
+metadata/_custom_type_script = "uid://drmdh0qd0ex7d"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1722953194]
+offset_left = -9.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = -14.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1209428778]
+libraries/ = SubResource("AnimationLibrary_ke61e")

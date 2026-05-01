@@ -4,7 +4,12 @@ extends Node2D
 @onready var ground_layer: TileMapLayer
 @onready var move_layer: TileMapLayer
 
+var occupancy: Dictionary[Vector2i, Node2D]
+
 var astar_grid: AStarGrid2D
+
+func _ready():
+	SignalBus.any_moved.connect(update_occupancy)
 
 #This function just grabs the tile map layers and sets them in the right variables
 #Please do note the names have to be EXACT otherwise it bugs out, also if we change the heirarchy its gonna bug out
@@ -13,6 +18,7 @@ func initialize(level_node: Node2D):
 	ground_layer = level_node.get_node("Ground")
 	move_layer = level_node.get_node("MoveOverlay")
 	make_grid()
+	update_occupancy()
 		
 #This is in levels so we only have to generate it every new level, from my understanding most of these commands are
 #just standard protocol when making an AStarGrid2D, I got this from a Youtube Tutorial btw
@@ -53,3 +59,38 @@ func _move_range(player_pos):
 			var path = astar_grid.get_id_path(player_tile, target_tile)
 			if path.size() > 0 and path.size() <= max_range+1:
 				move_layer.set_cell(target_tile, 0, Vector2i(0,0))
+
+func show_hint(positions, atlas_coords):
+	move_layer.clear()
+	for pos in positions:
+		move_layer.set_cell(pos, 0, atlas_coords)
+
+
+
+func update_occupancy():
+	var all_enemies = get_tree().get_nodes_in_group("enemy_units")
+	
+	var all_players = get_tree().get_nodes_in_group("player_units")
+	
+	occupancy.clear()
+	
+	#filters out enemies in current level
+	for enemy in all_enemies:
+		if enemy.is_visible_in_tree():
+			occupancy[ground_layer.local_to_map(enemy.global_position)] = enemy
+	
+	for player in all_players:
+		if player.is_visible_in_tree():
+			occupancy[ground_layer.local_to_map(player.global_position)] = player
+
+func get_action_context() -> TurnAction.Context:
+	var ctx = TurnAction.Context.new()
+	ctx.ground = ground_layer
+	ctx.tilemap = tile_map
+	ctx.occupancy = occupancy
+	ctx.tile_size = ground_layer.tile_set.tile_size.x
+	return ctx
+	
+	
+	
+	

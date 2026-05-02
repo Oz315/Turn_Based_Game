@@ -7,6 +7,7 @@ extends Resource
 
 class_name TurnAction
 
+
 @export var icon: Texture2D = preload("res://actions/icons/no_icon_attack.png")
 @export var name: String = "Unnamed Attack"
 

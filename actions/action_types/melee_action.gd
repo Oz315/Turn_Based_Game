@@ -22,7 +22,7 @@ func validate(caller: Node2D, target:Vector2i, level: Level) -> bool:
 	var opponent = level.occupancy[target]
 	if opponent == caller:
 		return false
-	return level.tile_pos(caller).distance_to(target) < range
+	return level.tile_pos(caller).distance_to(target) <= range
 	
 func execute(caller: Node2D, target:Vector2i, level: Level):
 	var opponent = level.occupancy.get(target)

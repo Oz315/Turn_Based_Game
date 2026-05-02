@@ -23,6 +23,8 @@ func _emit_action_strike():
 func _ready():
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.health_depleted.connect(_on_health_depleted)
+	health_component.health = health_component.max_health
+	health_bar.value = 100
 
 func _on_health_changed(delta: int):
 	health_bar.value += delta
@@ -70,3 +72,4 @@ func _physics_process(delta):
 	
 	if global_position == target_position:
 		current_id_path.pop_front()
+		SignalBus.any_moved.emit()

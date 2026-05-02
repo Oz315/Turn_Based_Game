@@ -33,6 +33,9 @@ func _on_health_changed(delta: int):
 	health_bar.value += delta
 
 func _on_health_depleted():
+	# update the occupancy map
+	SignalBus.any_moved.emit()
+	
 	# die, somehow
 	# TODO
 	queue_free()
@@ -57,13 +60,15 @@ func take_turn():
 		id_path = id_path.slice(0, 2)
 	if id_path.is_empty() == false:
 		current_id_path = id_path
-	attack_area(player.global_position)
+	first_playable_attack(player)
 	turn_finished = true
 	
-func attack_area(player_position):
-	target_tile = level.tile_map.local_to_map(player_position)
-	intent = true
-
+func first_playable_attack(player: Node2D):
+	for action in actions:
+		var positions = action.hint(self, level)
+		if not positions.is_empty():
+			await action.execute(self, positions.pick_random(), level)
+			break;
 
 #Exact same as players
 func _physics_process(delta):

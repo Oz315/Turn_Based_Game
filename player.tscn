@@ -2,7 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://b3v4h1732e5sn" path="res://tiles/pixil-frame-0.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bdamioekqrmi3" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="2_1jxqw"]
+[ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="3_dw050"]
 [ext_resource type="Script" uid="uid://cclxfhhjjd7ky" path="res://camera_2d.gd" id="3_i3pqv"]
+[ext_resource type="Resource" uid="uid://cqdek7iqy56ps" path="res://actions/polearm_attack.tres" id="4_1jxqw"]
 [ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="4_hqtel"]
 
 [sub_resource type="Animation" id="Animation_i3pqv"]
@@ -82,6 +85,7 @@ _data = {
 
 [node name="Player" type="Node2D" unique_id=2078899362 groups=["player_units"]]
 script = ExtResource("1_onrkg")
+actions = Array[ExtResource("2_1jxqw")]([ExtResource("3_dw050"), ExtResource("4_1jxqw")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=915920627]
 texture = ExtResource("1_4flbx")

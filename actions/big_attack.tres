@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("1_06tsv")
+damage = 20
+range = 2
 icon = ExtResource("1_bnthu")
 name = "Big Attack"
 metadata/_custom_type_script = "uid://41iyg81l0i8"

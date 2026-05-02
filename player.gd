@@ -40,6 +40,9 @@ func _on_health_changed(delta: int):
 	health_bar.value += delta
 
 func _on_health_depleted():
+	# update the occupancy map
+	SignalBus.any_moved.emit()
+	
 	# die, somehow
 	# TODO
 	queue_free()

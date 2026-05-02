@@ -66,9 +66,10 @@ func take_turn():
 func first_playable_attack(player: Node2D):
 	for action in actions:
 		var positions = action.hint(self, level)
-		if not positions.is_empty():
-			await action.execute(self, positions.pick_random(), level)
-			break;
+		for position in positions:
+			if level.occupancy.get(position) is Player:
+				await action.execute(self, positions.pick_random(), level)
+				break;
 
 #Exact same as players
 func _physics_process(delta):

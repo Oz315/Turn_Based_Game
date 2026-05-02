@@ -1,5 +1,8 @@
 extends Node2D
 
+# Type hints
+class_name Player
+
 #check levels.gd for more details about the level variable here
 var level
 var current_id_path: Array[Vector2i]
@@ -30,6 +33,7 @@ func _ready():
 	health_component.health_depleted.connect(_on_health_depleted)
 	health_component.health = health_component.max_health
 	health_bar.value = 100
+	
 	
 
 func _on_health_changed(delta: int):

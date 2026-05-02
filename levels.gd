@@ -21,9 +21,16 @@ func initialize():
 	move_layer = %MoveOverlay
 	make_grid()
 	var units = get_tree().get_nodes_in_group("player_units") + get_tree().get_nodes_in_group("enemy_units")
+	var player = null
 	for unit in units:
+		if unit is Player:
+			player = unit
 		unit.level = self #updates the variable level in enemies and player
 	SignalBus.any_moved.connect(_on_any_moved)
+	
+	# HACK: Im not sure where to put this, but player turns seem to happen without 
+	# the turn() function at the start of each level
+	SignalBus.player_turn.emit(player)
 		
 
 func tile_pos(node: Node2D):

@@ -20,5 +20,6 @@ func player_turn():
 	# when character sprite clicked then play or something
 	var all_players = get_tree().get_nodes_in_group("player_units")
 	for player in all_players:
-		get_parent().get_node("HUD").display_actions(player.actions)
-		player.new_turn()
+		if player is Player:
+			SignalBus.player_turn.emit(player)
+			player.new_turn()

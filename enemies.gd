@@ -1,5 +1,8 @@
 extends Node2D
 
+# Type hints
+class_name Enemy
+
 #this is updated by level, check levels.gd for more details
 var level
 

@@ -9,6 +9,30 @@ var current_id_path: Array[Vector2i]
 var target_tile: Vector2i
 var intent = false
 
+# _emit_action_strike is keyframed in animations to trigger damage in attack scripts
+signal action_strike
+func _emit_action_strike():
+	action_strike.emit()
+
+# The list of actions/attacks this unit can play
+@export var actions: Array[TurnAction] = [preload("res://actions/basic_attack.tres")]
+
+@onready var health_bar = $ProgressBar
+@onready var health_component = $HealthComponent
+
+func _ready():
+	health_component.health_changed.connect(_on_health_changed)
+	health_component.health_depleted.connect(_on_health_depleted)
+
+func _on_health_changed(delta: int):
+	health_bar.value += delta
+
+func _on_health_depleted():
+	# die, somehow
+	# TODO
+	queue_free()
+	pass
+
 #This was just for testing
 #func _ready():
 	#print(name, " has groups: ", get_groups(), " and enemy script ", name, " has method ", has_method("take_turn"))

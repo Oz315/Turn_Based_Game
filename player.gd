@@ -8,6 +8,30 @@ var is_moving = false
 #I haven't implemented an attack mode yet
 var is_attacking = false 
 
+# _emit_action_strike is keyframed in animations to trigger damage in attack scripts
+signal action_strike
+func _emit_action_strike():
+	action_strike.emit()
+
+# The list of actions/attacks available to the player
+@export var actions: Array[TurnAction] = [preload("res://actions/basic_attack.tres")]
+
+@onready var health_bar = $ProgressBar
+@onready var health_component = $HealthComponent
+
+func _ready():
+	health_component.health_changed.connect(_on_health_changed)
+	health_component.health_depleted.connect(_on_health_depleted)
+
+func _on_health_changed(delta: int):
+	health_bar.value += delta
+
+func _on_health_depleted():
+	# die, somehow
+	# TODO
+	queue_free()
+	pass
+
 #Just resets the players turn with the boolean change
 func new_turn():
 	has_moved = false

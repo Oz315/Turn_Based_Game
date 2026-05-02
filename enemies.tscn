@@ -2,6 +2,58 @@
 
 [ext_resource type="Script" uid="uid://xrqv2i1ngkvo" path="res://enemies.gd" id="1_g5tt5"]
 [ext_resource type="Texture2D" uid="uid://b3v4h1732e5sn" path="res://tiles/pixil-frame-0.png" id="1_gu34h"]
+[ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="3_fqt3r"]
+
+[sub_resource type="Animation" id="Animation_g5tt5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fqt3r"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10007151, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.61086524, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_emit_action_strike"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5rkbg"]
+_data = {
+&"RESET": SubResource("Animation_g5tt5"),
+&"attack": SubResource("Animation_fqt3r")
+}
 
 [node name="Enemies" type="Node2D" unique_id=184206467 groups=["enemy_units"]]
 script = ExtResource("1_g5tt5")
@@ -10,3 +62,17 @@ script = ExtResource("1_g5tt5")
 texture = ExtResource("1_gu34h")
 region_enabled = true
 region_rect = Rect2(64, 32, 32, 32)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1561813557]
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 9.0
+offset_bottom = -12.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=335483943]
+libraries/ = SubResource("AnimationLibrary_5rkbg")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=223262345]
+script = ExtResource("3_fqt3r")
+metadata/_custom_type_script = "uid://bv0aoeby5lp7e"

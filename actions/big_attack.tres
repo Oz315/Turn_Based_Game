@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MeleeAction" format=3 uid="uid://bn5h3kqu77hvj"]
+
+[ext_resource type="Script" uid="uid://41iyg81l0i8" path="res://actions/action_types/melee_action.gd" id="1_06tsv"]
+[ext_resource type="Texture2D" uid="uid://dcbjptwmm1hsa" path="res://actions/icons/big_attack.png" id="1_bnthu"]
+
+[resource]
+script = ExtResource("1_06tsv")
+icon = ExtResource("1_bnthu")
+name = "Big Attack"
+metadata/_custom_type_script = "uid://41iyg81l0i8"

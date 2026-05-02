@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MeleeAction" format=3 uid="uid://d2erah5l8nc2e"]
+
+[ext_resource type="Script" uid="uid://41iyg81l0i8" path="res://actions/action_types/melee_action.gd" id="1_3qfcm"]
+[ext_resource type="Texture2D" uid="uid://rym2fjx6k64b" path="res://actions/icons/basic_attack.png" id="1_j4yb3"]
+
+[resource]
+script = ExtResource("1_3qfcm")
+damage = 5
+range = 1
+icon = ExtResource("1_j4yb3")
+name = "Basic Attack"
+metadata/_custom_type_script = "uid://41iyg81l0i8"

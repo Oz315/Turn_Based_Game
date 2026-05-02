@@ -12,10 +12,13 @@ var is_moving = false
 
 # Are we waiting on the player to choose a target for the attack?
 var is_attacking = false 
-# If so, what attack are we waiting on?
+# What attack we are waiting on
 var current_action: TurnAction = null
-# What targets does the player have to choose from?
+# What targets does the player has to choose from
 var current_hint: Array[Vector2i] = []
+
+var is_in_attack_animation = false
+var has_attacked = false
 
 # _emit_action_strike is keyframed in animations to trigger damage in attack scripts
 signal action_strike
@@ -51,6 +54,7 @@ func _on_health_depleted():
 #Just resets the players turn with the boolean change
 func new_turn():
 	has_moved = false
+	has_attacked = false
 	print("new turn triggering, this should only be printing once")
 
 #This should be triggering each time you click the move button
@@ -65,7 +69,7 @@ func _enable_move():
 		level.move_layer.clear()
 
 func _on_request_action(action: TurnAction):
-	if is_attacking:
+	if is_attacking or has_attacked:
 		return
 		
 	current_action = action
@@ -77,7 +81,7 @@ func _on_request_action(action: TurnAction):
 
 func _input(event):
 	#This code was taken from the same Youtube Tutorial as the astar grid creation one, with some modifications of course
-	if is_moving == false and is_attacking == false or event.is_action_pressed("click") == false:
+	if is_moving == false and is_attacking == false or event.is_action_pressed("click") == false or is_in_attack_animation:
 		return
 
 	if is_moving:
@@ -92,11 +96,16 @@ func _input(event):
 			is_moving = false
 			level.move_layer.clear()
 			has_moved = true
-	if is_attacking:
-		var selected_pos = level.tile_map.local_to_map(get_global_mouse_position())
-		if current_hint.has(selected_pos):
-			current_action.execute(self, selected_pos, level)
+	if is_attacking and not is_in_attack_animation:
 		is_attacking = false
+		var selected_pos = level.tile_map.local_to_map(get_global_mouse_position())
+		
+		if current_hint.has(selected_pos):
+			is_in_attack_animation = true
+			await current_action.execute(self, selected_pos, level)
+			has_attacked = true
+			is_in_attack_animation = false
+			
 		level.move_layer.clear()
 		current_hint.clear()
 	

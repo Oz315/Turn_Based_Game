@@ -8,6 +8,10 @@ class_name MeleeAction
 @export var animation_name: String = "attack"
 
 func hint(caller: Node2D, level: Level) -> Array[Vector2i]:
+	
+	# iterate over everyone other than the player and show a hint
+	# at their position if they are within range
+	
 	var caller_pos = level.tile_pos(caller)
 	
 	var cells: Array[Vector2i] = []

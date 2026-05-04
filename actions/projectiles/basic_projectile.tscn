@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://xlbbsaqpf8mx"]
+
+[ext_resource type="Script" uid="uid://vlx4t0o8j2if" path="res://actions/projectiles/basic_projectile.gd" id="1_rym2m"]
+[ext_resource type="Texture2D" uid="uid://cayrfbk3gjtwy" path="res://actions/projectiles/basic_projectile.png" id="2_sj08e"]
+
+[node name="BasicProjectile" type="Node2D" unique_id=641075374]
+script = ExtResource("1_rym2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1467290890]
+texture = ExtResource("2_sj08e")

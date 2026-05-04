@@ -1,5 +1,8 @@
 extends Node2D
 
+# Type hints
+class_name Enemy
+
 #this is updated by level, check levels.gd for more details
 var level
 
@@ -8,6 +11,35 @@ var turn_finished = false
 var current_id_path: Array[Vector2i]
 var target_tile: Vector2i
 var intent = false
+
+# _emit_action_strike is keyframed in animations to trigger damage in attack scripts
+signal action_strike
+func _emit_action_strike():
+	action_strike.emit()
+
+# The list of actions/attacks this unit can play
+@export var actions: Array[TurnAction] = [preload("res://actions/basic_attack.tres")]
+
+@onready var health_bar = $ProgressBar
+@onready var health_component = $HealthComponent
+
+func _ready():
+	health_component.health_changed.connect(_on_health_changed)
+	health_component.health_depleted.connect(_on_health_depleted)
+	health_component.health = health_component.max_health
+	health_bar.value = 10
+
+func _on_health_changed(delta: int):
+	health_bar.value += delta
+
+func _on_health_depleted():
+	# update the occupancy map
+	SignalBus.any_moved.emit()
+	
+	# die, somehow
+	# TODO
+	queue_free()
+	pass
 
 #This was just for testing
 #func _ready():
@@ -28,13 +60,16 @@ func take_turn():
 		id_path = id_path.slice(0, 2)
 	if id_path.is_empty() == false:
 		current_id_path = id_path
-	attack_area(player.global_position)
+	first_playable_attack(player)
 	turn_finished = true
 	
-func attack_area(player_position):
-	target_tile = level.tile_map.local_to_map(player_position)
-	intent = true
-
+func first_playable_attack(player: Node2D):
+	for action in actions:
+		var positions = action.hint(self, level)
+		for position in positions:
+			if level.occupancy.get(position) is Player:
+				await action.execute(self, positions.pick_random(), level)
+				break;
 
 #Exact same as players
 func _physics_process(delta):
@@ -46,3 +81,4 @@ func _physics_process(delta):
 	
 	if global_position == target_position:
 		current_id_path.pop_front()
+		SignalBus.any_moved.emit()

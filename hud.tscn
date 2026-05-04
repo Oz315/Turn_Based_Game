@@ -19,32 +19,6 @@ grow_vertical = 0
 toggle_mode = true
 text = "Move"
 
-[node name="Attack1" type="Button" parent="." unique_id=760958473]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -50.0
-offset_right = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Attack1"
-
-[node name="Attack2" type="Button" parent="." unique_id=250128783]
-anchors_preset = -1
-anchor_left = 0.574
-anchor_top = 1.0
-anchor_right = 0.574
-anchor_bottom = 1.0
-offset_left = -39.247986
-offset_top = -50.0
-offset_right = 40.752014
-grow_horizontal = 2
-grow_vertical = 0
-text = "Attack2"
-
 [node name="EndTurn" type="Button" parent="." unique_id=1277784263]
 anchors_preset = 3
 anchor_left = 1.0
@@ -56,6 +30,27 @@ offset_top = -59.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Turn"
+
+[node name="ActionContainer" type="HBoxContainer" parent="." unique_id=955948513]
+offset_left = 544.0
+offset_top = 599.0
+offset_right = 1019.0
+offset_bottom = 647.0
+
+[node name="TurnCounter" type="Label" parent="." unique_id=2080720630]
+offset_right = 123.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 30
+text = "Turn 1/15"
+
+[node name="LoadingScreen" type="ColorRect" parent="." unique_id=1086873422]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="pressed" from="Move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]

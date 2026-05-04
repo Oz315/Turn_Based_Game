@@ -15,6 +15,10 @@ run/main_scene="uid://tnsa4cdericw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*uid://dfae70u4bdkse"
+
 [global_group]
 
 player_units=""

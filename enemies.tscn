@@ -167,19 +167,18 @@ metadata/_custom_type_script = "uid://bv0aoeby5lp7e"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=397128257]
 sprite_frames = SubResource("SpriteFrames_e0nqx")
 animation = &"walk"
-frame = 1
-frame_progress = 0.27390867
+frame_progress = 0.8876192
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1888538827]
+visible = false
 position = Vector2(39, 0)
 sprite_frames = SubResource("SpriteFrames_30rnt")
 animation = &"walk"
-frame = 1
-frame_progress = 0.616076
+frame_progress = 0.023906602
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="." unique_id=105464061]
+visible = false
 position = Vector2(73, 1)
 sprite_frames = SubResource("SpriteFrames_ed8km")
 animation = &"walk"
-frame = 1
-frame_progress = 0.039670803
+frame_progress = 0.37825286

@@ -26,6 +26,10 @@ func validate(caller: Node2D, target:Vector2i, level: Level) -> bool:
 	var opponent = level.occupancy[target]
 	if opponent == caller:
 		return false
+	
+	if not shared_axis(level.tile_pos(caller), target):
+		return false
+		
 	return level.tile_pos(caller).distance_to(target) <= range
 	
 func execute(caller: Node2D, target:Vector2i, level: Level):

@@ -25,6 +25,8 @@ func validate(caller: Node2D, target:Vector2i, level: Level) -> bool:
 	if opponent == caller:
 		return false
 	var dst = level.tile_pos(caller).distance_to(target)
+	var occluded = false
+
 	return dst <= max_range and dst >= min_range
 	
 func execute(caller: Node2D, target:Vector2i, level: Level):

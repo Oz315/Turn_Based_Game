@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RangedAction" format=3 uid="uid://dperug3efyr5w"]
+
+[ext_resource type="Texture2D" uid="uid://7f1sdjfrx1j0" path="res://actions/icons/no_icon_attack.png" id="1_rrtim"]
+[ext_resource type="PackedScene" uid="uid://xlbbsaqpf8mx" path="res://actions/projectiles/basic_projectile.tscn" id="2_4i486"]
+[ext_resource type="Script" uid="uid://v48kqhun3a3t" path="res://actions/action_types/ranged_action.gd" id="3_52nd2"]
+
+[resource]
+script = ExtResource("3_52nd2")
+damage = 99
+max_range = 99
+projecile_speed = 1000
+name = "Dev Gun"
+metadata/_custom_type_script = "uid://v48kqhun3a3t"

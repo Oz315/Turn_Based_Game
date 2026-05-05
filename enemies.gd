@@ -26,15 +26,15 @@ func _emit_action_strike():
 func _ready():
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.health_depleted.connect(_on_health_depleted)
-	health_component.health = health_component.max_health
-	health_bar.value = 10
+	health_bar.max_value = health_component.max_health
+	health_bar.value = health_component.health
 
 func _on_health_changed(delta: int):
 	health_bar.value += delta
 
 func _on_health_depleted():
 	# update the occupancy map
-	SignalBus.any_moved.emit()
+	SignalBus.any_died.emit(self)
 	
 	# die, somehow
 	# TODO

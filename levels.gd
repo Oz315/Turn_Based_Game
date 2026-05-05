@@ -27,6 +27,7 @@ func initialize():
 			player = unit
 		unit.level = self #updates the variable level in enemies and player
 	SignalBus.any_moved.connect(_on_any_moved)
+	SignalBus.any_died.connect(_on_any_moved)
 	
 	# HACK: Im not sure where to put this, but player turns seem to happen without 
 	# the turn() function at the start of each level
@@ -37,6 +38,9 @@ func tile_pos(node: Node2D):
 	return tile_map.local_to_map(node.global_position)
 
 func _on_any_moved():
+	update_occupancy()
+
+func _on_any_died(unit):
 	update_occupancy()
 
 func update_occupancy():

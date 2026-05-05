@@ -41,9 +41,14 @@ func _on_any_moved():
 
 func update_occupancy():
 	occupancy.clear()
-	var units = get_tree().get_nodes_in_group("player_units") + get_tree().get_nodes_in_group("enemy_units")
+	var tree = get_tree()
+	if tree == null:
+		return
+	var units = tree.get_nodes_in_group("player_units") + tree.get_nodes_in_group("enemy_units")
 	for unit in units:
 		occupancy[tile_map.local_to_map(unit.global_position)] = unit
+		if unit is Node:
+			unit.tree_exited.connect(update_occupancy)
 
 #This is in levels so we only have to generate it every new level, from my understanding most of these commands are
 #just standard protocol when making an AStarGrid2D, I got this from a Youtube Tutorial btw

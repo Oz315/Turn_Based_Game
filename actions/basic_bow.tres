@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="RangedAction" format=3 uid="uid://dx0bjyb2wc88e"]
 
 [ext_resource type="Texture2D" uid="uid://drh2hxkhcy51m" path="res://actions/icons/bow.png" id="1_25oqm"]
-[ext_resource type="PackedScene" uid="uid://xlbbsaqpf8mx" path="res://actions/projectiles/basic_projectile.tscn" id="2_ko6l2"]
 [ext_resource type="Script" uid="uid://v48kqhun3a3t" path="res://actions/action_types/ranged_action.gd" id="3_ualbk"]
 
 [resource]
@@ -10,6 +9,7 @@ damage = 2
 max_range = 8
 min_range = 3
 projecile_speed = 1000
+animation_name = null
 icon = ExtResource("1_25oqm")
 name = "Bow"
 metadata/_custom_type_script = "uid://v48kqhun3a3t"

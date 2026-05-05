@@ -56,6 +56,8 @@ func take_turn():
 		level.tile_map.local_to_map(player.global_position)
 		).slice(1, -1) #note this slice stop enemies from moving onto the players tile but will still overlap with other enemies
 		#This limits movement to two tiles increase this and the 2 in slice for different movement
+	
+	
 	if id_path.size() > 2:
 		id_path = id_path.slice(0, 2)
 	if id_path.is_empty() == false:
@@ -77,8 +79,11 @@ func _physics_process(delta):
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
 	
+	$AnimatedSprite2D.play("walk")
 	global_position = global_position.move_toward(target_position, 2)
+	
 	
 	if global_position == target_position:
 		current_id_path.pop_front()
 		SignalBus.any_moved.emit()
+		$AnimatedSprite2D.stop()

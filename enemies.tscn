@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dsecsqppabyd8" path="res://PIXEL ART/Shark Knight No Helmet.png" id="2_fqt3r"]
 [ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="3_fqt3r"]
 [ext_resource type="Texture2D" uid="uid://4q8qdjk727xu" path="res://PIXEL ART/Shark Knight No Helmet Moving.png" id="4_5rkbg"]
+[ext_resource type="Texture2D" uid="uid://cq675xogpim7i" path="res://PIXEL ART/Frog Archer.png" id="5_jwg6e"]
+[ext_resource type="Texture2D" uid="uid://kri3e8sepjb5" path="res://PIXEL ART/Frog Archer Moving.png" id="6_pg2g7"]
+[ext_resource type="Texture2D" uid="uid://clkkt66mn5mlc" path="res://PIXEL ART/Dragon.png" id="7_ln6a5"]
+[ext_resource type="Texture2D" uid="uid://b17n3mee3kprs" path="res://PIXEL ART/Dragon Moving.png" id="8_qglgh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqt3r"]
 
@@ -74,15 +78,62 @@ animations = [{
 }],
 "loop": true,
 "name": &"static",
-"speed": 3.0
+"speed": 2.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fqt3r")
+}, {
 "duration": 1.0,
 "texture": ExtResource("4_5rkbg")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 3.0
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_30rnt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jwg6e")
+}],
+"loop": true,
+"name": &"static",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jwg6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pg2g7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ed8km"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ln6a5")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_qglgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ln6a5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
 }]
 
 [node name="Enemies" type="Node2D" unique_id=184206467 groups=["enemy_units"]]
@@ -116,4 +167,19 @@ metadata/_custom_type_script = "uid://bv0aoeby5lp7e"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=397128257]
 sprite_frames = SubResource("SpriteFrames_e0nqx")
 animation = &"walk"
-frame_progress = 0.40053314
+frame = 1
+frame_progress = 0.27390867
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1888538827]
+position = Vector2(39, 0)
+sprite_frames = SubResource("SpriteFrames_30rnt")
+animation = &"walk"
+frame = 1
+frame_progress = 0.616076
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="." unique_id=105464061]
+position = Vector2(73, 1)
+sprite_frames = SubResource("SpriteFrames_ed8km")
+animation = &"walk"
+frame = 1
+frame_progress = 0.039670803

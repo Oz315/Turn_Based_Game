@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://42ssi35bexms"]
 
 [ext_resource type="Script" uid="uid://xrqv2i1ngkvo" path="res://enemies.gd" id="1_g5tt5"]
-[ext_resource type="Texture2D" uid="uid://b3v4h1732e5sn" path="res://tiles/pixil-frame-0.png" id="1_gu34h"]
+[ext_resource type="Texture2D" uid="uid://dsecsqppabyd8" path="res://PIXEL ART/Shark Knight No Helmet.png" id="2_fqt3r"]
 [ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="3_fqt3r"]
+[ext_resource type="Texture2D" uid="uid://4q8qdjk727xu" path="res://PIXEL ART/Shark Knight No Helmet Moving.png" id="4_5rkbg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqt3r"]
 
@@ -54,25 +55,50 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_1v8mu"]
+resource_name = "walk"
+loop_mode = 1
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5rkbg"]
 _data = {
 &"RESET": SubResource("Animation_g5tt5"),
-&"attack": SubResource("Animation_fqt3r")
+&"attack": SubResource("Animation_fqt3r"),
+&"walk": SubResource("Animation_1v8mu")
 }
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0nqx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fqt3r")
+}],
+"loop": true,
+"name": &"static",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5rkbg")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
 
 [node name="Enemies" type="Node2D" unique_id=184206467 groups=["enemy_units"]]
 script = ExtResource("1_g5tt5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1977063900]
-texture = ExtResource("1_gu34h")
+visible = false
+texture = ExtResource("2_fqt3r")
 region_enabled = true
-region_rect = Rect2(64, 32, 32, 32)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1561813557]
-offset_left = -7.0
-offset_top = -16.0
-offset_right = 9.0
-offset_bottom = -12.0
+offset_left = -8.0
+offset_top = -18.0
+offset_right = 8.0
+offset_bottom = -16.0
 theme_override_styles/background = SubResource("StyleBoxFlat_fqt3r")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5rkbg")
 max_value = 10.0
@@ -81,7 +107,13 @@ show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=335483943]
 libraries/ = SubResource("AnimationLibrary_5rkbg")
+autoplay = &"walk"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=223262345]
 script = ExtResource("3_fqt3r")
 metadata/_custom_type_script = "uid://bv0aoeby5lp7e"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=397128257]
+sprite_frames = SubResource("SpriteFrames_e0nqx")
+animation = &"walk"
+frame_progress = 0.40053314

@@ -28,6 +28,9 @@ func occupied_cells(pos: Vector2i, range: int, level: Level) -> Array[Vector2i]:
 			cells.append(opponent_pos)
 	return cells
 
+func shared_axis(a: Vector2i, b: Vector2i) -> bool:
+	return a.x == b.x or a.y == b.y
+
 func health_component(node: Node) -> HealthComponent:
 	for child in node.get_children():
 		if child is HealthComponent:

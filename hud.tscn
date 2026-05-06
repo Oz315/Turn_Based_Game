@@ -33,10 +33,15 @@ grow_vertical = 0
 text = "End Turn"
 
 [node name="ActionContainer" type="HBoxContainer" parent="." unique_id=955948513]
-offset_left = 544.0
-offset_top = 599.0
-offset_right = 1019.0
-offset_bottom = 647.0
+anchors_preset = -1
+anchor_left = 0.67800003
+anchor_top = 1.0
+anchor_right = 0.67800003
+anchor_bottom = 1.0
+offset_left = -237.05603
+offset_top = -49.0
+offset_right = 237.94397
+offset_bottom = -1.0
 
 [node name="TurnCounter" type="Label" parent="." unique_id=2080720630]
 offset_right = 123.0

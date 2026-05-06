@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://beeenxatwbtag"]
+
+[ext_resource type="Texture2D" uid="uid://clkkt66mn5mlc" path="res://PIXEL ART/Dragon.png" id="1_28y3a"]
+[ext_resource type="Texture2D" uid="uid://b17n3mee3kprs" path="res://PIXEL ART/Dragon Moving.png" id="2_bjhs1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_28y3a")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bjhs1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_28y3a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
+}]

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dhu7wys2v8med" path="res://all_levels/levels.tscn" id="1_j4pox"]
 [ext_resource type="PackedScene" uid="uid://d07g2jscftu7p" path="res://player.tscn" id="2_7yred"]
 [ext_resource type="PackedScene" uid="uid://42ssi35bexms" path="res://enemies.tscn" id="3_2dv4h"]
+[ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="4_2dv4h"]
 
 [node name="Levels" unique_id=1950013390 instance=ExtResource("1_j4pox")]
 
@@ -17,6 +18,7 @@ position = Vector2(48, -16)
 
 [node name="Enemy1" parent="Units" parent_id_path=PackedInt32Array(841793513) index="1" unique_id=184206467 instance=ExtResource("3_2dv4h")]
 position = Vector2(-144, -336)
+actions = ExtResource("4_2dv4h")
 
 [node name="Enemy2" parent="Units" parent_id_path=PackedInt32Array(841793513) index="2" unique_id=1890583893 instance=ExtResource("3_2dv4h")]
 position = Vector2(208, -176)

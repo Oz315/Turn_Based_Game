@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://onj4cnrlqutm"]
 
 [ext_resource type="Script" uid="uid://ttgiyauxwaxi" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="FontFile" uid="uid://d3vwv02h5wt2k" path="res://fonts/Cardinal.ttf" id="2_64ctp"]
 
 [node name="HUD" type="CanvasLayer" unique_id=2066656993]
 script = ExtResource("1_37p78")
@@ -40,6 +41,7 @@ offset_bottom = 647.0
 [node name="TurnCounter" type="Label" parent="." unique_id=2080720630]
 offset_right = 123.0
 offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("2_64ctp")
 theme_override_font_sizes/font_size = 30
 text = "Turn 1/15"
 

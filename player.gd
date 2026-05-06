@@ -64,7 +64,7 @@ func _enable_move():
 	# This is so that you can "cancel" your movement
 	is_moving = not is_moving
 	if is_moving:
-		level._move_range(global_position)
+		level._move_range(global_position, 2)
 	else:
 		level.move_layer.clear()
 

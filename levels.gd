@@ -77,17 +77,16 @@ func make_grid():
 
 #this function is what paints over the black outline for where the player can move
 #I'm thinking this can be made to work with the attack_range too
-func _move_range(player_pos):
+func _move_range(player_pos, range):
 	move_layer.clear()
 	var player_tile = tile_map.local_to_map(player_pos)
-	var max_range = 2
 	
-	for x in range(-max_range, max_range+1):
-		for y in range(-max_range, max_range+1):
+	for x in range(-range, range+1):
+		for y in range(-range, range+1):
 			var target_tile = player_tile + Vector2i(x,y)
 			
 			var path = astar_grid.get_id_path(player_tile, target_tile)
-			if path.size() > 0 and path.size() <= max_range+1:
+			if path.size() > 0 and path.size() <= range+1:
 				move_layer.set_cell(target_tile, 0, Vector2i(0,0))
 
 func show_hint(positions, atlas_coords):

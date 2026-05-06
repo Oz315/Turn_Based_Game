@@ -5,7 +5,6 @@ extends Node2D
 class_name Level
 
 @onready var tile_map: TileMapLayer
-@onready var ground_layer: TileMapLayer
 @onready var move_layer: TileMapLayer
 @export var turn_limit: int = 15
 var astar_grid: AStarGrid2D
@@ -16,8 +15,7 @@ var occupancy: Dictionary[Vector2i, Node2D]
 #just gives its location to them, so its more dynamic and doesn't matter where they hide, so long
 #as they are in the right groups
 func initialize():
-	tile_map = %Background
-	ground_layer = %Ground
+	tile_map = %WalkableTiles
 	move_layer = %MoveOverlay
 	make_grid()
 	var units = get_tree().get_nodes_in_group("player_units") + get_tree().get_nodes_in_group("enemy_units")
@@ -69,10 +67,9 @@ func make_grid():
 			var tile_data = tile_map.get_cell_tile_data(tile_position)
 			#This ground_data is so that it checks if there is "ground" beneath the player so that they
 			#don't just fly into the sky
-			var ground_data = ground_layer.get_cell_tile_data(tile_position + Vector2i(0, 1))
 			
 			#its a long if statement but just checking for the custom data
-			if tile_data == null or tile_data.get_custom_data("walkable")  == false or ground_data == null or ground_data.get_custom_data("solid") == false:
+			if tile_data == null or tile_data.get_custom_data("walkable")  == false:
 				astar_grid.set_point_solid(tile_position)
 
 #this function is what paints over the black outline for where the player can move

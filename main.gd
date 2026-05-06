@@ -7,7 +7,7 @@ var level_list = [
 	"res://all_levels/level1.tscn",
 	"res://all_levels/level2.tscn"
 ]
-#this is a temporary fix to a problem i was having
+#this is a temporary fix to a problem i was having'
 var test = false
 var current_level = 0
 # So the best thing we can do is have each level as its own scene, its not the most enjoyable but its most
@@ -49,7 +49,8 @@ func _no_enemies():
 	if test:
 		return
 	await get_tree().process_frame #if you remove this it'll miss the enemy death check
-	var enemies = get_tree().get_nodes_in_group("enemy_units")
+	var enemies = get_tree().get_nodes_in_group("enemy_units").filter(func(node): return not node.is_queued_for_deletion())
+	
 	if enemies.is_empty():
 		test = true
 		#if we want to have a victory screen gotta call it before the fade_in

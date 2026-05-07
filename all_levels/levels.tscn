@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://cwxvo1memmj6i" path="res://tiles/maintiles.tres" id="1_48rmr"]
 [ext_resource type="Script" uid="uid://bimxsrivsu7t8" path="res://levels.gd" id="1_xv4fl"]
 [ext_resource type="TileSet" uid="uid://b0133vajikmg2" path="res://tiles/walkable.tres" id="3_5ay0o"]
+[ext_resource type="TileSet" uid="uid://bgo6j4kolhtv7" path="res://BUILDING_BLOCKS.tres" id="5_jhani"]
 
 [node name="Levels" type="Node2D" unique_id=1950013390]
 script = ExtResource("1_xv4fl")
@@ -22,6 +23,9 @@ tile_set = ExtResource("3_5ay0o")
 
 [node name="Background" type="TileMapLayer" parent="MapTiles" unique_id=873117621]
 tile_set = ExtResource("1_48rmr")
+
+[node name="Dark_Blocks" type="TileMapLayer" parent="MapTiles" unique_id=719921363]
+tile_set = ExtResource("5_jhani")
 
 [node name="Ground" type="TileMapLayer" parent="MapTiles" unique_id=364663810]
 tile_set = ExtResource("1_48rmr")

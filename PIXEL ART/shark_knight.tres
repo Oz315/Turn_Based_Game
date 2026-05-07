@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://g1l0bkevs6ea"]
+
+[ext_resource type="Texture2D" uid="uid://dsecsqppabyd8" path="res://PIXEL ART/Shark Knight No Helmet.png" id="1_lhwed"]
+[ext_resource type="Texture2D" uid="uid://4q8qdjk727xu" path="res://PIXEL ART/Shark Knight No Helmet Moving.png" id="2_t0cbr"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lhwed")
+}],
+"loop": true,
+"name": &"static",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lhwed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_t0cbr")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://onj4cnrlqutm"]
 
 [ext_resource type="Script" uid="uid://ttgiyauxwaxi" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="FontFile" uid="uid://d3vwv02h5wt2k" path="res://fonts/Cardinal.ttf" id="2_64ctp"]
 
 [node name="HUD" type="CanvasLayer" unique_id=2066656993]
 script = ExtResource("1_37p78")
@@ -32,14 +33,20 @@ grow_vertical = 0
 text = "End Turn"
 
 [node name="ActionContainer" type="HBoxContainer" parent="." unique_id=955948513]
-offset_left = 544.0
-offset_top = 599.0
-offset_right = 1019.0
-offset_bottom = 647.0
+anchors_preset = -1
+anchor_left = 0.67800003
+anchor_top = 1.0
+anchor_right = 0.67800003
+anchor_bottom = 1.0
+offset_left = -237.05603
+offset_top = -49.0
+offset_right = 237.94397
+offset_bottom = -1.0
 
 [node name="TurnCounter" type="Label" parent="." unique_id=2080720630]
 offset_right = 123.0
 offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("2_64ctp")
 theme_override_font_sizes/font_size = 30
 text = "Turn 1/15"
 

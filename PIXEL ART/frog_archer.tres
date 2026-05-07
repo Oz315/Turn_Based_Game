@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://d3kc3rlniwxkv"]
+
+[ext_resource type="Texture2D" uid="uid://cq675xogpim7i" path="res://PIXEL ART/Frog Archer.png" id="1_k3ufq"]
+[ext_resource type="Texture2D" uid="uid://kri3e8sepjb5" path="res://PIXEL ART/Frog Archer Moving.png" id="2_8e48d"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k3ufq")
+}],
+"loop": true,
+"name": &"static",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k3ufq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8e48d")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
+}]

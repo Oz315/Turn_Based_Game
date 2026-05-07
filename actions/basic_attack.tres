@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://41iyg81l0i8" path="res://actions/action_types/melee_action.gd" id="1_3qfcm"]
 [ext_resource type="Texture2D" uid="uid://rym2fjx6k64b" path="res://actions/icons/basic_attack.png" id="1_j4yb3"]
+[ext_resource type="SpriteFrames" uid="uid://g1l0bkevs6ea" path="res://PIXEL ART/shark_knight.tres" id="3_mvyh3"]
 
 [resource]
 script = ExtResource("1_3qfcm")
@@ -9,4 +10,6 @@ damage = 2
 range = 1
 icon = ExtResource("1_j4yb3")
 name = "Basic Attack"
+sprites = ExtResource("3_mvyh3")
+move_range = 3
 metadata/_custom_type_script = "uid://41iyg81l0i8"

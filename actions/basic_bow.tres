@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://drh2hxkhcy51m" path="res://actions/icons/bow.png" id="1_25oqm"]
 [ext_resource type="PackedScene" uid="uid://xlbbsaqpf8mx" path="res://actions/projectiles/basic_projectile.tscn" id="2_ko6l2"]
 [ext_resource type="Script" uid="uid://v48kqhun3a3t" path="res://actions/action_types/ranged_action.gd" id="3_ualbk"]
+[ext_resource type="SpriteFrames" uid="uid://d3kc3rlniwxkv" path="res://PIXEL ART/frog_archer.tres" id="4_ko6l2"]
 
 [resource]
 script = ExtResource("3_ualbk")
@@ -10,7 +11,8 @@ damage = 2
 max_range = 8
 min_range = 3
 projecile_speed = 1000
-animation_name = null
 icon = ExtResource("1_25oqm")
 name = "Bow"
+sprites = ExtResource("4_ko6l2")
+max_health = 5
 metadata/_custom_type_script = "uid://v48kqhun3a3t"

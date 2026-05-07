@@ -3,9 +3,38 @@ extends TurnAction
 
 class_name MeleeAction
 
-@export var damage: int
+
 @export var range: int
 @export var animation_name: String = "attack"
+@export var damage: int
+
+func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
+	var target_node = level.occupancy.get(target)
+	if validate(caller, target, level) and target_node:
+		return [make_hint(target_node, damage)]
+	return []
+
+func record(caller: Node2D, target:Vector2i, level: Level) -> Array[ActionSegment]:
+	var r: Array[ActionSegment] = []
+	
+	
+	var opponent = level.occupancy.get(target)
+	
+	if opponent == null:
+		return r
+	
+	var anim_player = caller.get_node("AnimationPlayer") as AnimationPlayer
+	
+	r.append(record_animation(caller, anim_player, animation_name))
+
+	r.append(record_await(caller, caller.action_strike))
+	
+	r.append(record_apply_damage(caller, damage))
+	
+	r.append(record_await(caller, anim_player.animation_finished))
+
+	return r
+
 
 func hint(caller: Node2D, level: Level) -> Array[Vector2i]:
 	

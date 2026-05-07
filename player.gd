@@ -8,7 +8,7 @@ var level
 var current_id_path: Array[Vector2i]
 var has_moved = false
 var is_moving = false
-
+var is_in_move_animation = false
 
 # Are we waiting on the player to choose a target for the attack?
 var is_attacking = false 
@@ -95,6 +95,7 @@ func _input(event):
 			is_moving = false
 			level.move_layer.clear()
 			has_moved = true
+			is_in_move_animation = true
 	if is_attacking and not is_in_attack_animation:
 		is_attacking = false
 		var selected_pos = level.tile_map.local_to_map(get_global_mouse_position())
@@ -110,6 +111,9 @@ func _input(event):
 	
 func _physics_process(delta):
 	if current_id_path.is_empty():
+		if is_in_move_animation:
+			is_in_move_animation = false
+			SignalBus.any_moved.emit()
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
 	
@@ -117,5 +121,5 @@ func _physics_process(delta):
 	global_position = global_position.move_toward(target_position, 2)
 	
 	if global_position == target_position:
-		SignalBus.any_moved.emit()
+		
 		current_id_path.pop_front()

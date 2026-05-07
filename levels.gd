@@ -10,6 +10,7 @@ class_name Level
 var astar_grid: AStarGrid2D
 
 var occupancy: Dictionary[Vector2i, Node2D]
+signal occupancy_changed
 
 #improved pathing, instead of having player and enemies find the level root, this level root
 #just gives its location to them, so its more dynamic and doesn't matter where they hide, so long
@@ -51,6 +52,7 @@ func update_occupancy():
 		occupancy[tile_map.local_to_map(unit.global_position)] = unit
 		if unit is Node:
 			unit.tree_exited.connect(update_occupancy)
+	occupancy_changed.emit()
 
 #This is in levels so we only have to generate it every new level, from my understanding most of these commands are
 #just standard protocol when making an AStarGrid2D, I got this from a Youtube Tutorial btw

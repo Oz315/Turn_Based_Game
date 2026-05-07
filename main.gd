@@ -7,13 +7,10 @@ var level_list = [
 	"res://all_levels/level1.tscn",
 	"res://all_levels/level2.tscn"
 ]
-<<<<<<< HEAD
+
 #this is a temporary fix to a problem i was having
 var in_level_transition = false
-=======
-#this is a temporary fix to a problem i was having'
-var test = false
->>>>>>> 5b5ce27eaedfa8370ee87410e06830d9aff11f14
+
 var current_level = 0
 # So the best thing we can do is have each level as its own scene, its not the most enjoyable but its most
 # optimal and from what I've read the best practice in cases like ours
@@ -56,7 +53,7 @@ func _on_unit_died(unit):
 		return
 
 	await get_tree().process_frame #if you remove this it'll miss the enemy death check
-<<<<<<< HEAD
+
 	var enemies = get_tree().get_nodes_in_group("enemy_units")
 	if enemies.is_empty() or enemies.size() == 1 and enemies[0] == unit:
 		advance_level()
@@ -73,18 +70,3 @@ func advance_level():
 	else:
 		#should have some signal to hud to print a victory screen
 		print("you win")
-=======
-	var enemies = get_tree().get_nodes_in_group("enemy_units").filter(func(node): return not node.is_queued_for_deletion())
-	
-	if enemies.is_empty():
-		test = true
-		#if we want to have a victory screen gotta call it before the fade_in
-		await $HUD.fade_in()
-		print("no more enemies remain")
-		current_level += 1
-		if current_level < level_list.size():
-			load_level(level_list[current_level])
-		else:
-			#should have some signal to hud to print a victory screen
-			print("you win")
->>>>>>> 5b5ce27eaedfa8370ee87410e06830d9aff11f14

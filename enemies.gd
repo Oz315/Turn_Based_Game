@@ -26,16 +26,13 @@ func _emit_action_strike():
 func _ready():
 	health_component.health_changed.connect(_on_health_changed)
 	health_component.health_depleted.connect(_on_health_depleted)
-<<<<<<< HEAD
-	health_bar.max_value = health_component.max_health
-	health_bar.value = health_component.health
-=======
+
 	health_component.health = actions.max_health
 	health_bar.max_value = actions.max_health
 	health_bar.value = health_component.health
 	$AnimatedSprite2D.sprite_frames = actions.sprites
 	$AnimatedSprite2D.play("static")
->>>>>>> 5b5ce27eaedfa8370ee87410e06830d9aff11f14
+
 
 func _on_health_changed(delta: int):
 	health_bar.value += delta

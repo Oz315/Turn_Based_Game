@@ -9,22 +9,36 @@ extends Node
 class_name HealthComponent
 
 signal health_changed(diff: int)
+signal max_health_changed(diff: int)
 signal health_depleted
 
-@export var max_health: int = 10
+@export var max_health: int = 10: set = set_max_health, get = get_max_health
 @onready var health: int = max_health: set = set_health, get = get_health
 
 func set_health(v: int):
+	print("set health to ", v)
 	var delta = v - health
 	health_changed.emit(delta)
-	
+
 	health = v
 	if health == 0:
 		health_depleted.emit()
 		SignalBus.any_moved.emit()
 
+func get_max_health() -> int:
+	return max_health
+
+func set_max_health(v: int):
+	var delta = v - max_health
+	if v < health:
+		set_health(v)
+	max_health_changed.emit(delta)
+	max_health = v
+
 func get_health() -> int:
+	print("health is ", health)
 	return health
+
 
 func take_damage(damage: int):
 	var actual = clampi(damage, 0, health)

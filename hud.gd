@@ -24,13 +24,13 @@ func fade_out(duration: float = 1.0, extra_wait_time: float = 0.5) -> void:
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(loading_screen, "color:a", 0.0, duration)
 	await get_tree().create_timer(duration).timeout
-	
+
 ## Create a button for each action provided, and link it to the players _on_request_action() function
 func display_actions(actions: Array[TurnAction]):
 	for n in $ActionContainer.get_children():
 		$ActionContainer.remove_child(n)
-		n.queue_free() 
-	
+		n.queue_free()
+
 	for action in actions:
 		var btn = Button.new()
 		btn.icon = action.icon
@@ -40,7 +40,8 @@ func display_actions(actions: Array[TurnAction]):
 
 func _on_attack_pressed(btn: Button, action: TurnAction):
 	var player = get_tree().get_first_node_in_group("player_units")
-	player._on_request_action(action)
+	if player is Player:
+		player._on_request_action(action)
 
 func _on_player_turn(player: Player):
 	display_actions(player.actions)
@@ -64,4 +65,3 @@ func _on_end_turn_pressed():
 	lock_ui(true)
 	end_turn.emit()
 	#print("group call done for end turn")
-	

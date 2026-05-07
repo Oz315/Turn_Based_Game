@@ -7,9 +7,8 @@ func enemies_turn():
 		
 	#print("turnqueue: found ", enemies.size(), " enemies")
 	for enemy in enemies:
-		enemy.turn_finished = false
 		await enemy.take_turn()
-		await get_tree().create_timer(0.3).timeout #then wait a bit longer because this code zooms by sometimes
+		await get_tree().create_timer(0.1).timeout #then wait a bit longer because this code zooms by sometimes
 	current_turn += 1
 	SignalBus.inc_turn.emit(current_turn)
 	player_turn()

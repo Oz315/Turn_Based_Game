@@ -7,8 +7,10 @@ var level_list = [
 	"res://all_levels/level1.tscn",
 	"res://all_levels/level2.tscn"
 ]
-#this is a temporary fix to a problem i was having'
-var test = false
+
+#this is a temporary fix to a problem i was having
+var in_level_transition = false
+
 var current_level = 0
 # So the best thing we can do is have each level as its own scene, its not the most enjoyable but its most
 # optimal and from what I've read the best practice in cases like ours
@@ -19,7 +21,7 @@ func _ready():
 	#Signal from HUD will tell TurnQueue to do its enemies_turn function
 	$HUD.end_turn.connect($TurnQueue.enemies_turn)
 	$HUD.fade_out()
-	SignalBus.any_moved.connect(_no_enemies)
+	SignalBus.any_died.connect(_on_unit_died)
 	SignalBus.inc_turn.connect(turn_update)
 #making this a function so we can call it to load the other levels
 
@@ -43,22 +45,28 @@ func load_level(level):
 	await $HUD.fade_out()
 	$HUD.update_turns(1, new_level.turn_limit)
 	print("loaded level ", level)
-	test = false
+	in_level_transition = false
 
-func _no_enemies():
-	if test:
+
+func _on_unit_died(unit):
+	if in_level_transition:
 		return
+
 	await get_tree().process_frame #if you remove this it'll miss the enemy death check
-	var enemies = get_tree().get_nodes_in_group("enemy_units").filter(func(node): return not node.is_queued_for_deletion())
-	
-	if enemies.is_empty():
-		test = true
-		#if we want to have a victory screen gotta call it before the fade_in
-		await $HUD.fade_in()
-		print("no more enemies remain")
-		current_level += 1
-		if current_level < level_list.size():
-			load_level(level_list[current_level])
-		else:
-			#should have some signal to hud to print a victory screen
-			print("you win")
+
+	var enemies = get_tree().get_nodes_in_group("enemy_units")
+	if enemies.is_empty() or enemies.size() == 1 and enemies[0] == unit:
+		advance_level()
+
+
+func advance_level():
+	in_level_transition = true
+	#if we want to have a victory screen gotta call it before the fade_in
+	await $HUD.fade_in()
+	print("no more enemies remain")
+	current_level += 1
+	if current_level < level_list.size():
+		load_level(level_list[current_level])
+	else:
+		#should have some signal to hud to print a victory screen
+		print("you win")

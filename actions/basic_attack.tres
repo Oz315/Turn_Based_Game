@@ -9,4 +9,5 @@ range = 1
 damage = 2
 icon = ExtResource("1_j4yb3")
 name = "Basic Attack"
+tooltip = "A basic melee attack. Deals 2 damage to an adjacent target"
 metadata/_custom_type_script = "uid://41iyg81l0i8"

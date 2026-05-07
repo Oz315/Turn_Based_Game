@@ -7,78 +7,23 @@ extends Resource
 
 class_name TurnAction
 
-
 @export var icon: Texture2D = preload("res://actions/icons/no_icon_attack.png")
 @export var name: String = "Unnamed Attack"
-
-
-class ActionSegment:
-	enum Type {
-		PlayAnimation,
-		AwaitSignal,
-		ApplyDamage,
-		Instantiate,
-	}
-	var type: Type
-	var signal_to_await
-	var target_node: Node
-	var animation_player: AnimationPlayer
-	var animation_name
-	var damage
-	
-
-func record_animation(target_node, anim, anim_name):
-	var ts: ActionSegment
-	ts.type = ActionSegment.Type.PlayAnimation
-	ts.target_node = target_node
-	ts.animation_player = anim
-	ts.animation_name = anim_name
-	return ts
-
-func record_await(target_node, signal_to_await):
-	var ts: ActionSegment
-	ts.type = ActionSegment.Type.AwaitSignal
-	ts.target_node = target_node
-	ts.signal_to_await = signal_to_await
-	return ts
-
-func record_apply_damage(target_node, damage):
-	var ts: ActionSegment
-	ts.type = ActionSegment.Type.AwaitSignal
-	ts.target_node = target_node
-	ts.damage = damage
-	return ts
-
-func execute_recording(recording: Array[ActionSegment]):
-	for segment in recording:
-		match segment.type:
-			ActionSegment.Type.PlayAnimation:
-				segment.animation_player.play(segment.animation_name)
-			ActionSegment.Type.AwaitSignal:
-				await segment.signal_to_await
-			ActionSegment.Type.ApplyDamage:
-				apply_damage(segment.target, segment.damage)
-
-# record a list of actions to take during your turn
-func record(caller: Node2D, target:Vector2i, level: Level) -> Array[ActionSegment]:
-	return []
-
+@export var tooltip: String = "If you are reading this you forgot to specialize the tooltip for your new attack"
 
 class DamageHint:
 	var dmg: int
-	var target_node: Node
+	var target: Vector2i
 	
-func make_hint(target_node: Node, dmg: int) -> DamageHint:
+func make_hint(target: Vector2i, dmg: int) -> DamageHint:
 	var h: DamageHint = DamageHint.new()
 	h.dmg = dmg
-	h.target_node = target_node
+	h.target = target
 	return h
 
-
+# Which cells would take damage from this attack?
 func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
 	return []
-	
-
 
 # use the levels ASTAR grid to find walkable cells within a given range
 func walkable_cells(pos: Vector2i, range: int, level: Level) -> Array[Vector2i]:

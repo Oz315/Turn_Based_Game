@@ -12,4 +12,5 @@ min_range = 3
 projecile_speed = 1000
 icon = ExtResource("1_25oqm")
 name = "Bow"
+tooltip = "A basic ranged attack. Deal a small amount of damage to a target in line with you and in range. Cannot target enemies closer than 3 cells away."
 metadata/_custom_type_script = "uid://v48kqhun3a3t"

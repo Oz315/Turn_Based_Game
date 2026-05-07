@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_06tsv")
-damage = 5
 range = 2
+damage = 5
 icon = ExtResource("1_bnthu")
 name = "Big Attack"
-damage = 5
+tooltip = "Deal a larger amount of damage to a single target in melee range"
 metadata/_custom_type_script = "uid://41iyg81l0i8"

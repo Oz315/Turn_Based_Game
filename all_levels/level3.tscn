@@ -4,15 +4,8 @@
 [ext_resource type="TileSet" uid="uid://bgo6j4kolhtv7" path="res://BUILDING_BLOCKS.tres" id="2_ysggr"]
 [ext_resource type="PackedScene" uid="uid://d07g2jscftu7p" path="res://player.tscn" id="3_lmq2a"]
 [ext_resource type="PackedScene" uid="uid://42ssi35bexms" path="res://enemies.tscn" id="4_qippj"]
-[ext_resource type="Texture2D" uid="uid://7f1sdjfrx1j0" path="res://actions/icons/no_icon_attack.png" id="5_2pp2l"]
-[ext_resource type="PackedScene" uid="uid://xlbbsaqpf8mx" path="res://actions/projectiles/basic_projectile.tscn" id="6_am5b4"]
-[ext_resource type="Script" uid="uid://v48kqhun3a3t" path="res://actions/action_types/ranged_action.gd" id="7_yil86"]
-[ext_resource type="SpriteFrames" uid="uid://d3kc3rlniwxkv" path="res://PIXEL ART/frog_archer.tres" id="8_n2dvl"]
-
-[sub_resource type="Resource" id="Resource_mc3et"]
-script = ExtResource("7_yil86")
-sprites = ExtResource("8_n2dvl")
-metadata/_custom_type_script = "uid://v48kqhun3a3t"
+[ext_resource type="Resource" uid="uid://d3iitgj2y1x7i" path="res://enemy_types/frog_enemy.tres" id="5_6vnyr"]
+[ext_resource type="Resource" uid="uid://ds0luxeo4g23f" path="res://enemy_types/dragon_enemy.tres" id="6_ty2xf"]
 
 [node name="Levels" unique_id=1950013390 instance=ExtResource("1_lyoih")]
 
@@ -39,10 +32,11 @@ position = Vector2(560, -80)
 
 [node name="Frog1" parent="Units" parent_id_path=PackedInt32Array(841793513) index="2" unique_id=1175112232 instance=ExtResource("4_qippj")]
 position = Vector2(560, -272)
-actions = SubResource("Resource_mc3et")
+enemy_type = ExtResource("5_6vnyr")
 
 [node name="Shark2" parent="Units" parent_id_path=PackedInt32Array(841793513) index="3" unique_id=960525365 instance=ExtResource("4_qippj")]
 position = Vector2(1040, 80)
 
 [node name="Dragon" parent="Units" parent_id_path=PackedInt32Array(841793513) index="4" unique_id=2010549665 instance=ExtResource("4_qippj")]
 position = Vector2(2768, 528)
+enemy_type = ExtResource("6_ty2xf")

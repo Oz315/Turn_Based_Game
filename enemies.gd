@@ -4,13 +4,15 @@ extends Node2D
 class_name Enemy
 
 #this is updated by level, check levels.gd for more details
-var level
+var level: Level
 
 #I tried to use signals but I kept having issues with it so I just opted for boolean checks
 var is_moving = false
 var current_id_path: Array[Vector2i]
 var target_tile: Vector2i
 var intent = false
+
+
 
 signal done_moving
 
@@ -19,12 +21,14 @@ signal action_strike
 func _emit_action_strike():
 	action_strike.emit()
 
-# The list of actions/attacks this unit can play
-@export var actions: TurnAction = preload("res://actions/basic_attack.tres")
+var next_attack: TurnAction = null
+
+# Description of enemy stats, sprites, and default attacks
 @export var enemy_type: EnemyType = preload("res://enemy_types/shark_enemy.tres")
 
 @onready var health_bar = $ProgressBar
 @onready var health_component = $HealthComponent
+@onready var intent_icon: IntentIcon = $IntentIcon
 
 func _ready():
 	health_component.health_changed.connect(_on_health_changed)
@@ -35,6 +39,11 @@ func _ready():
 	health_bar.value = health_component.health
 	$AnimatedSprite2D.sprite_frames = enemy_type.sprites
 	$AnimatedSprite2D.play("static")
+	
+	# HACK: hard-code the first attack intent
+	next_attack = enemy_type.actions[0]
+	intent_icon.action = next_attack
+	intent_icon.update()
 
 func _on_health_changed(delta: int):
 	health_bar.value += delta
@@ -61,6 +70,11 @@ func take_turn():
 	if not player:
 		#should have some code here to end the game, maybe have the player be able to replay the level
 		return
+	
+	play_next_attack(player)
+	next_attack = null
+	update_intent()
+	
 	#level.occupancy.erase(level.tile_map.local_to_map(global_position))
 	var id_path = level.astar_grid.get_id_path(
 		level.tile_map.local_to_map(global_position),
@@ -74,26 +88,42 @@ func take_turn():
 	if id_path.is_empty() == false:
 		current_id_path = id_path
 	#level.occupancy[level.tile_map.local_to_map(global_position)] = self
-	first_playable_attack(player)
+	
 	is_moving = true
 	await done_moving
 	
+	next_attack = first_playable_attack(player)
+	update_intent()
 	
-func first_playable_attack(player: Node2D):
-	var positions = actions.hint(self, level)
+func play_next_attack(player: Player):
+	var positions = next_attack.hint(self, level)
 	for position in positions:
 		if level.occupancy.get(position) is Player:
-			await actions.execute(self, positions.pick_random(), level)
-			break;
+			await next_attack.execute(self, positions.pick_random(), level)
+
+func first_playable_attack(player: Node2D) -> TurnAction:
+	for action in enemy_type.actions:
+		var positions = action.hint(self, level)
+		for position in positions:
+			if level.occupancy.get(position) is Player:
+				return action;
+	return enemy_type.actions[0]
 
 func update_intent():
-	var positions = actions.hint(self, level)
+	intent_icon.action = next_attack
+	intent_icon.update()
+	if next_attack == null:
+		return
+		
+	var positions = next_attack.hint(self, level)
 	for position in positions:
 		if level.occupancy.get(position) is Player:
-			var hints = actions.damage_hint(self, position, level)
+			var hints = next_attack.damage_hint(self, position, level)
 			for hint in hints:
-				print("Intending to attack ", hint.target_node.name, " for ", hint.dmg)
+				if level.occupancy.get(hint.target) is Player:
+					print("Intending to attack ", level.occupancy.get(hint.target).name, " for ", hint.dmg)
 			break;
+	
 
 func _on_occupancy_changed():
 	update_intent()
@@ -103,6 +133,8 @@ func _physics_process(delta):
 	if current_id_path.is_empty():
 		if is_moving:
 			SignalBus.any_moved.emit()
+			if level != null:
+				level.update_occupancy() # force an update to avoid race conditions
 			done_moving.emit()
 			is_moving = false
 		return

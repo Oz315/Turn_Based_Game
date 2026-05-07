@@ -7,10 +7,12 @@ class_name Enemy
 var level
 
 #I tried to use signals but I kept having issues with it so I just opted for boolean checks
-var turn_finished = false
+var is_moving = false
 var current_id_path: Array[Vector2i]
 var target_tile: Vector2i
 var intent = false
+
+signal done_moving
 
 # _emit_action_strike is keyframed in animations to trigger damage in attack scripts
 signal action_strike
@@ -71,7 +73,9 @@ func take_turn():
 		current_id_path = id_path
 	level.occupancy[level.tile_map.local_to_map(global_position)] = self
 	first_playable_attack(player)
-	turn_finished = true
+	is_moving = true
+	await done_moving
+	
 	
 func first_playable_attack(player: Node2D):
 	var positions = actions.hint(self, level)
@@ -84,6 +88,10 @@ func first_playable_attack(player: Node2D):
 #Exact same as players
 func _physics_process(delta):
 	if current_id_path.is_empty():
+		if is_moving:
+			SignalBus.any_moved.emit()
+			done_moving.emit()
+			is_moving = false
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
 	
@@ -93,4 +101,4 @@ func _physics_process(delta):
 	if global_position == target_position:
 		current_id_path.pop_front()
 		$AnimatedSprite2D.stop()
-		SignalBus.any_moved.emit()
+		

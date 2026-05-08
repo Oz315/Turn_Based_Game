@@ -4,7 +4,7 @@ extends Node2D
 class_name Player
 
 #check levels.gd for more details about the level variable here
-var level
+var level: Level
 var current_id_path: Array[Vector2i]
 var has_moved = false
 var is_moving = false
@@ -16,6 +16,11 @@ var is_attacking = false
 var current_action: TurnAction = null
 # What targets does the player has to choose from
 var current_hint: Array[Vector2i] = []
+# What target did the player choose
+var current_action_target: Vector2i
+# Did the player click an attack target and we are waiting for the them to 
+# cancel or end the turn?
+var current_action_target_chosen: bool = false
 
 var is_in_attack_animation = false
 var has_attacked = false
@@ -76,8 +81,21 @@ func _on_request_action(action: TurnAction):
 	
 	current_hint = action.hint(self, level)
 
-	level.show_hint(current_hint, Vector2i(1, 0))
+	level.show_hint(current_hint, Vector2i(0, 0))
 	is_attacking = true
+
+func _on_confirm_attack():
+	if current_action_target_chosen:
+		current_action_target_chosen = false
+		is_in_attack_animation = true
+		level.move_layer.clear()
+		current_hint.clear()
+		await current_action.execute(self, current_action_target, level)
+		has_attacked = true
+		is_in_attack_animation = false
+		current_action = null
+		is_attacking = false
+
 
 func _input(event):
 	#This code was taken from the same Youtube Tutorial as the astar grid creation one, with some modifications of course
@@ -100,18 +118,20 @@ func _input(event):
 			has_moved = true
 			is_in_move_animation = true
 	if is_attacking and not is_in_attack_animation:
-		is_attacking = false
+		
 		var selected_pos = level.tile_map.local_to_map(get_global_mouse_position())
 		
 		if current_hint.has(selected_pos):
-			is_in_attack_animation = true
-			await current_action.execute(self, selected_pos, level)
-			has_attacked = true
-			is_in_attack_animation = false
-			
-		level.move_layer.clear()
-		current_hint.clear()
+			current_action_target_chosen = true
+			current_action_target = selected_pos
+			level.show_hint(current_hint, Vector2i(0, 0))
+			level.move_layer.set_cell(selected_pos, 0, Vector2i(1, 0)) # Show an attack indicator over the selected tile
+		else:
+			level.move_layer.clear()
+			current_hint.clear()
+			is_attacking = false
 	
+
 func _physics_process(delta):
 	if current_id_path.is_empty():
 		if is_in_move_animation:

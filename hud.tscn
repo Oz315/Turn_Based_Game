@@ -59,5 +59,18 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
+[node name="ConfirmAttack" type="Button" parent="." unique_id=1952099978]
+anchors_preset = -1
+anchor_left = 0.96500003
+anchor_top = 0.90400004
+anchor_right = 0.96500003
+anchor_bottom = 0.90400004
+offset_left = -39.680054
+offset_top = -45.792053
+offset_right = 40.319946
+offset_bottom = 0.20794678
+text = "Attack"
+
 [connection signal="pressed" from="Move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="ConfirmAttack" to="." method="_on_confirm_attack_pressed"]

@@ -72,11 +72,16 @@ func _enable_move():
 		level._move_range(global_position, 2)
 	else:
 		level.move_layer.clear()
+	is_attacking = false
+	current_action_target_chosen = false
+	current_action = null
+	current_hint.clear()
 
 func _on_request_action(action: TurnAction):
 	if is_attacking or has_attacked:
 		return
-		
+	
+	is_moving = false
 	current_action = action
 	
 	current_hint = action.hint(self, level)

@@ -5,13 +5,8 @@ extends Node2D
 # first place
 var level_list = [
 	"res://all_levels/level1.tscn",
-<<<<<<< HEAD
 	"res://all_levels/level2.tscn",
-	"res://all_levels/level3.tscn"
-=======
-	"res://all_levels/level2.tscn"#,
 	#"res://all_levels/level3.tscn"
->>>>>>> a84fe198b7048f295be55847e53a2f805f8eabb4
 ]
 
 #this is a temporary fix to a problem i was having

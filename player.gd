@@ -59,7 +59,7 @@ func new_turn():
 
 #This should be triggering each time you click the move button
 func _enable_move():
-	if has_moved:
+	if has_moved or has_attacked:
 		return
 	# This is so that you can "cancel" your movement
 	is_moving = not is_moving

@@ -54,6 +54,9 @@ func update_occupancy():
 
 #This is in levels so we only have to generate it every new level, from my understanding most of these commands are
 #just standard protocol when making an AStarGrid2D, I got this from a Youtube Tutorial btw
+# Diagonal movement is now possible, within the WalkableTiles there is now a black tile
+# which should just be treated as a tile you can walk pass but never land on, put it for corners where you
+# want the player to step up
 func make_grid():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
@@ -73,7 +76,7 @@ func make_grid():
 			#don't just fly into the sky
 			
 			#its a long if statement but just checking for the custom data
-			if tile_data == null or tile_data.get_custom_data("walkable")  == false:
+			if tile_data == null:
 				astar_grid.set_point_solid(tile_position)
 
 #this function is what paints over the black outline for where the player can move
@@ -88,6 +91,9 @@ func _move_range(player_pos, range):
 			
 			var path = astar_grid.get_id_path(player_tile, target_tile)
 			if path.size() > 0 and path.size() <= range+1:
+				var tile_data = tile_map.get_cell_tile_data(target_tile)
+				if tile_data == null or tile_data.get_custom_data("air") == true:
+					continue
 				move_layer.set_cell(target_tile, 0, Vector2i(0,0))
 
 func show_hint(positions, atlas_coords):

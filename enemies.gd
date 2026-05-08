@@ -59,7 +59,6 @@ func take_turn():
 	if not player:
 		#should have some code here to end the game, maybe have the player be able to replay the level
 		return
-	level.occupancy.erase(level.tile_map.local_to_map(global_position))
 	var id_path = level.astar_grid.get_id_path(
 		level.tile_map.local_to_map(global_position),
 		level.tile_map.local_to_map(player.global_position)
@@ -67,11 +66,14 @@ func take_turn():
 		#This limits movement to two tiles increase this and the 2 in slice for different movement
 	if id_path.size() > actions.move_range:
 		id_path = id_path.slice(0, actions.move_range)
-	while id_path.is_empty() == false and level.occupancy.has(id_path[-1]):
-		id_path.pop_back()
+	while id_path.is_empty() == false:
+		var tile_data = level.tile_map.get_cell_tile_data(id_path[-1])
+		if (tile_data != null and tile_data.get_custom_data("air") == true) or level.occupancy.has(id_path[-1]):
+			id_path.pop_back()
+		else:
+			break
 	if id_path.is_empty() == false:
 		current_id_path = id_path
-	level.occupancy[level.tile_map.local_to_map(global_position)] = self
 	first_playable_attack(player)
 	is_moving = true
 	await done_moving

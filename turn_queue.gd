@@ -10,6 +10,8 @@ func enemies_turn():
 		
 	#print("turnqueue: found ", enemies.size(), " enemies")
 	for enemy in enemies:
+		if !is_instance_valid(enemy):
+			continue
 		await enemy.take_turn()
 		await get_tree().create_timer(0.1).timeout #then wait a bit longer because this code zooms by sometimes
 	current_turn += 1

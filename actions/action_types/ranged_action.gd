@@ -38,9 +38,9 @@ func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageH
 		var dir = (hit - caller_pos).sign()
 		var dst: int = 0
 		while true:
-			if dst >= min_range and dst <= max_range:
+			if dst > min_range and dst <= max_range:
 				a.append(make_hint(pos, damage))
-			if pos == hit:
+			if pos == hit or pos == target and not always_shoot_max_range:
 				break
 			pos += dir
 			dst += 1

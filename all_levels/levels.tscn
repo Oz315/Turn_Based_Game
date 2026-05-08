@@ -28,9 +28,14 @@ tile_set = ExtResource("1_48rmr")
 tile_set = ExtResource("5_jhani")
 
 [node name="Ground" type="TileMapLayer" parent="MapTiles" unique_id=364663810]
+unique_name_in_owner = true
 tile_set = ExtResource("1_48rmr")
 
 [node name="Water" type="TileMapLayer" parent="MapTiles" unique_id=406526636]
 tile_set = ExtResource("1_48rmr")
+
+[node name="AttackOverlay" type="TileMapLayer" parent="MapTiles" unique_id=1607132005]
+unique_name_in_owner = true
+tile_set = ExtResource("1_02xe8")
 
 [node name="Units" type="Node2D" parent="." unique_id=841793513]

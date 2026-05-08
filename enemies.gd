@@ -22,6 +22,8 @@ func _emit_action_strike():
 	action_strike.emit()
 
 var next_attack: TurnAction = null
+var next_attack_target: Vector2i = Vector2i(0, 0)
+var current_damage_hints: Array[TurnAction.DamageHint] = []
 
 # Description of enemy stats, sprites, and default attacks
 @export var enemy_type: EnemyType = preload("res://enemy_types/shark_enemy.tres")
@@ -49,8 +51,14 @@ func _on_health_changed(delta: int):
 	health_bar.value += delta
 
 func _on_health_depleted():
+	# remove any lingering damage hints
+	level.remove_damage_hints(current_damage_hints)
+
 	# update the occupancy map
 	SignalBus.any_died.emit(self)
+	
+	# apparently you need to disconnect signals
+	level.occupancy_changed.disconnect(_on_occupancy_changed)
 	
 	# die, somehow
 	# TODO
@@ -63,7 +71,7 @@ func _on_health_depleted():
 
 #How each enemy takes its turn, its movement logic is basically the same as the player except its target is the player
 func take_turn():
-	if level != null:
+	if level != null and not level.is_connected("occupancy_changed", _on_occupancy_changed):
 		level.occupancy_changed.connect(_on_occupancy_changed)
 	#print("take_turn running")
 	var player = get_tree().get_first_node_in_group("player_units")
@@ -71,7 +79,13 @@ func take_turn():
 		#should have some code here to end the game, maybe have the player be able to replay the level
 		return
 	
-	play_next_attack(player)
+	await play_next_attack(player)
+	
+	player = get_tree().get_first_node_in_group("player_units")
+	if player == null or not is_instance_valid(player):
+		#should have some code here to end the game, maybe have the player be able to replay the level
+		return
+	
 	next_attack = null
 	update_intent()
 	
@@ -90,42 +104,56 @@ func take_turn():
 	#level.occupancy[level.tile_map.local_to_map(global_position)] = self
 	
 	is_moving = true
-	await done_moving
 	
-	next_attack = first_playable_attack(player)
-	update_intent()
+	# hide damage hints while moving
+	level.remove_damage_hints(current_damage_hints)
+	await done_moving
+	level.add_damage_hints(current_damage_hints)
+	
+	# If the player isn't dead yet, play choose another attack and update intents
+	if is_instance_valid(player):
+		first_playable_attack(player)
+		
 	
 func play_next_attack(player: Player):
-	var positions = next_attack.hint(self, level)
-	for position in positions:
-		if level.occupancy.get(position) is Player:
-			await next_attack.execute(self, positions.pick_random(), level)
+	# just do what the hint last turn said we would do
+	if next_attack.validate(self, next_attack_target, level):
+		await next_attack.execute(self, next_attack_target, level)
+	
+	#var positions = next_attack.hint(self, level)
+	#for position in positions:
+		#if level.occupancy.get(position) is Player:
+			#await next_attack.execute(self, positions.pick_random(), level)
+	
 
-func first_playable_attack(player: Node2D) -> TurnAction:
+## Just play the first attack on any target you can
+func first_playable_attack(player: Player) -> void:
 	for action in enemy_type.actions:
 		var positions = action.hint(self, level)
 		for position in positions:
 			if level.occupancy.get(position) is Player:
-				return action;
-	return enemy_type.actions[0]
+				next_attack = action;
+				next_attack_target = position
+	next_attack = enemy_type.actions[0]
+	next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
+	update_intent()
+	
+
 
 func update_intent():
 	intent_icon.action = next_attack
 	intent_icon.update()
 	if next_attack == null:
 		return
-		
-	var positions = next_attack.hint(self, level)
-	for position in positions:
-		if level.occupancy.get(position) is Player:
-			var hints = next_attack.damage_hint(self, position, level)
-			for hint in hints:
-				if level.occupancy.get(hint.target) is Player:
-					print("Intending to attack ", level.occupancy.get(hint.target).name, " for ", hint.dmg)
-			break;
+	
+	level.remove_damage_hints(current_damage_hints)
+	current_damage_hints = next_attack.damage_hint(self, next_attack_target, level)
+	level.add_damage_hints(current_damage_hints)
 	
 
 func _on_occupancy_changed():
+	if is_queued_for_deletion():
+		return
 	update_intent()
 
 #Exact same as players

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="2_1jxqw"]
 [ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="3_dw050"]
 [ext_resource type="Script" uid="uid://cclxfhhjjd7ky" path="res://camera_2d.gd" id="3_i3pqv"]
-[ext_resource type="Resource" uid="uid://cqdek7iqy56ps" path="res://actions/polearm_attack.tres" id="4_1jxqw"]
+[ext_resource type="Resource" uid="uid://dmjicn3el30ue" path="res://actions/dynamite_attack.tres" id="4_dw050"]
 [ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="4_hqtel"]
 [ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="5_dw050"]
 [ext_resource type="Texture2D" uid="uid://bd8j1hlbo3aef" path="res://PIXEL ART/Player1.PNG" id="8_dw050"]
@@ -54,7 +54,7 @@ animations = [{
 
 [node name="Player" type="Node2D" unique_id=2078899362 groups=["player_units"]]
 script = ExtResource("1_onrkg")
-actions = Array[ExtResource("2_1jxqw")]([ExtResource("3_dw050"), ExtResource("4_1jxqw"), ExtResource("5_dw050")])
+actions = Array[ExtResource("2_1jxqw")]([ExtResource("3_dw050"), ExtResource("4_dw050"), ExtResource("5_dw050")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=453182132]
 script = ExtResource("3_i3pqv")

@@ -5,6 +5,7 @@
 
 [node name="BasicProjectile" type="Node2D" unique_id=641075374]
 script = ExtResource("1_rym2m")
+sprite = ExtResource("2_sj08e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1467290890]
 texture = ExtResource("2_sj08e")

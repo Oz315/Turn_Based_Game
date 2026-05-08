@@ -31,6 +31,8 @@ func walkable_cells(pos: Vector2i, range: int, level: Level) -> Array[Vector2i]:
 	for x in range(-range, range):
 		for y in range(-range, range):
 			var p = pos + Vector2i(x, y)
+			if not level.astar_grid.is_in_bounds(p.x, p.y):
+				continue
 			if not level.astar_grid.is_point_solid(p):
 				cells.append(p)
 	return cells
@@ -45,14 +47,15 @@ func occupied_cells(pos: Vector2i, range: int, level: Level) -> Array[Vector2i]:
 func shared_axis(a: Vector2i, b: Vector2i) -> bool:
 	return a.x == b.x or a.y == b.y
 
-func health_component(node: Node) -> HealthComponent:
+# Maybe these helpers should be pulled up into Levels or a separate Utils class
+static func health_component(node: Node) -> HealthComponent:
 	for child in node.get_children():
 		if child is HealthComponent:
 			return child
 	return null
 
 ## returns true if damage was applied, false otherwise
-func apply_damage(node: Node, dmg: int) -> bool:
+static func apply_damage(node: Node, dmg: int) -> bool:
 	if node == null:
 		return false
 	var hc = health_component(node)
@@ -62,6 +65,10 @@ func apply_damage(node: Node, dmg: int) -> bool:
 	return true
 
 # override in attack scripts. See melee_action.gd
+
+## Pick a random cell to attack, even if there is nothing there
+func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
+	return target
 
 ## Return an array of all grid positions that are valid targets for this action
 func hint(caller: Node2D, level: Level) -> Array[Vector2i]:

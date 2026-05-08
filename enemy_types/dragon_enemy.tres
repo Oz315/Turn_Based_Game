@@ -1,11 +1,12 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://ds0luxeo4g23f"]
 
-[ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="1_gwv1c"]
 [ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="1_q6gqc"]
 [ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="2_3hv7m"]
+[ext_resource type="Resource" uid="uid://devht6g6fpous" path="res://actions/dragon_fireball_attack.tres" id="2_q6gqc"]
 [ext_resource type="SpriteFrames" uid="uid://beeenxatwbtag" path="res://PIXEL ART/dragon.tres" id="3_3hv7m"]
 
 [resource]
 script = ExtResource("2_3hv7m")
 sprites = ExtResource("3_3hv7m")
+actions = Array[ExtResource("1_q6gqc")]([ExtResource("2_q6gqc")])
 metadata/_custom_type_script = "uid://d0tgudynvd5o7"

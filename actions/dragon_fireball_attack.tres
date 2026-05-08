@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AoeAction" format=3 uid="uid://devht6g6fpous"]
+
+[ext_resource type="Texture2D" uid="uid://cholllqihe1p8" path="res://actions/icons/dragon_fireball_attack.png" id="1_u30cn"]
+[ext_resource type="Texture2D" uid="uid://biovd3l1o4vg8" path="res://actions/projectiles/dragon_fireball.png" id="2_ca86c"]
+[ext_resource type="PackedScene" uid="uid://xlbbsaqpf8mx" path="res://actions/projectiles/basic_projectile.tscn" id="2_u30cn"]
+[ext_resource type="Script" uid="uid://dlaxmriagf5js" path="res://actions/action_types/aoe_action.gd" id="3_ca86c"]
+
+[resource]
+script = ExtResource("3_ca86c")
+damage = 5
+falloff = 2
+self_damage = false
+throw_range = 8
+aoe_range = 1
+arc_height = 16
+fire_duration = 2
+projectile_speed = 200
+projectile_icon = ExtResource("2_ca86c")
+icon = ExtResource("1_u30cn")
+name = "Dragon Fireball"
+tooltip = "A long range fireball that deals damage in a 3x3 area"
+metadata/_custom_type_script = "uid://dlaxmriagf5js"

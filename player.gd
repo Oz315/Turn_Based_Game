@@ -19,6 +19,7 @@ var current_hint: Array[Vector2i] = []
 
 var is_in_attack_animation = false
 var has_attacked = false
+var attack_charge_time =  0
 
 # _emit_action_strike is keyframed in animations to trigger damage in attack scripts
 signal action_strike
@@ -75,12 +76,12 @@ func _on_request_action(action: TurnAction):
 	
 	current_hint = action.hint(self, level)
 
-	level.show_hint(current_hint, Vector2i(0, 0))
+	level.show_hint(current_hint, Vector2i(1, 0))
 	is_attacking = true
 
 func _input(event):
 	#This code was taken from the same Youtube Tutorial as the astar grid creation one, with some modifications of course
-	if is_moving == false and is_attacking == false or event.is_action_pressed("click") == false or is_in_attack_animation:
+	if is_moving == false and is_attacking == false or event.is_action_pressed("click") == false or is_in_attack_animation or has_attacked:
 		return
 
 	if is_moving:
@@ -113,6 +114,11 @@ func _physics_process(delta):
 	if current_id_path.is_empty():
 		if is_in_move_animation:
 			is_in_move_animation = false
+			
+			# If we are standing in fire at the end of our turn, take 1 damage
+			if level.flaming_tiles.has(level.tile_pos(self)):
+				health_component.take_damage(1)
+				
 			SignalBus.any_moved.emit()
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())

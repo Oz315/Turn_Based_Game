@@ -9,10 +9,33 @@ class_name MeleeAction
 @export var damage: int
 
 func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
-	var target_node = level.occupancy.get(target)
-	if validate(caller, target, level) and target_node:
-		return [make_hint(target, damage)]
+	var caller_pos = level.tile_pos(caller)
+	if validate(caller, target, level):
+		var a: Array[DamageHint] = []
+		var dir: Vector2i = sign(target - caller_pos)
+		if dir.y != 0 and dir.x != 0:
+			dir.y = 0
+			
+		if dir.y == 0:
+			for x in range(1, range + 1):
+				a.append(make_hint(caller_pos + Vector2i(x * dir.x, 0), damage))
+		else:
+			for y in range(1, range + 1):
+				a.append(make_hint(caller_pos + Vector2i(0, y * dir.y), damage))
+		
+		return a
 	return []
+
+func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
+	var caller_pos = level.tile_pos(caller)
+	if validate(caller, target, level):
+		return target
+	var dir: Vector2i = sign(target - caller_pos)
+	if dir.y != 0 and dir.x != 0:
+		dir.y = 0
+	return caller_pos + dir * range
+	
+	
 
 func hint(caller: Node2D, level: Level) -> Array[Vector2i]:
 	
@@ -30,7 +53,7 @@ func hint(caller: Node2D, level: Level) -> Array[Vector2i]:
 	return cells
 	
 func validate(caller: Node2D, target:Vector2i, level: Level) -> bool:
-	var opponent = level.occupancy[target]
+	var opponent = level.occupancy.get(target)
 	if opponent == caller:
 		return false
 	

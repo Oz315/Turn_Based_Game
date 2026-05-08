@@ -15,14 +15,18 @@ func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
 	var caller_pos = level.tile_pos(caller)
 	if validate(caller, target, level):
 		return target
-	var dir: Vector2i = (target - caller_pos).sign()
+	var dir: Vector2i = (target - caller_pos)
 	if dir.y != 0 and dir.x != 0:
-		dir.y = 0
-	return caller_pos + dir * max_range
+		if abs(dir.y) > abs(dir.x):
+			dir.x = 0
+		else:
+			dir.y = 0
+	return caller_pos + dir.sign() * max_range
 
 func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
 	var caller_pos = level.tile_pos(caller)
 	if validate(caller, target, level):
+		var dst = target.distance_to(caller_pos)
 		var a: Array[DamageHint] = []
 		var dir: Vector2i = sign(target - caller_pos)
 		if dir.y != 0 and dir.x != 0:
@@ -66,11 +70,6 @@ func execute(caller: Node2D, target:Vector2i, level: Level):
 	var projectile = projectile_scene.instantiate()
 	caller.add_child(projectile)
 	
-	var opponent = level.occupancy.get(target)
-	
-	if opponent == null:
-		return
-	
 	var anim_player = caller.get_node("AnimationPlayer") as AnimationPlayer
 	
 	# play the attack animation and wait for the keyframed signal to apply damage
@@ -88,6 +87,8 @@ func execute(caller: Node2D, target:Vector2i, level: Level):
 		# leave the arrow in the target for fun
 		projectile.reparent(target_node, true)
 		apply_damage(target_node, damage)
+	else:
+		projectile.queue_free()
 	
 	if anim_player != null && anim_player.is_playing():
 		await anim_player.animation_finished

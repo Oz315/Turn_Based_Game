@@ -26,11 +26,6 @@ func initialize():
 		unit.level = self #updates the variable level in enemies and player
 	SignalBus.any_moved.connect(_on_any_moved)
 	SignalBus.any_died.connect(_on_any_moved)
-	
-	# HACK: Im not sure where to put this, but player turns seem to happen without 
-	# the turn() function at the start of each level
-	SignalBus.player_turn.emit(player)
-		
 
 func tile_pos(node: Node2D):
 	return tile_map.local_to_map(node.global_position)
@@ -92,7 +87,7 @@ func _move_range(player_pos, range):
 			var path = astar_grid.get_id_path(player_tile, target_tile)
 			if path.size() > 0 and path.size() <= range+1:
 				var tile_data = tile_map.get_cell_tile_data(target_tile)
-				if tile_data == null or tile_data.get_custom_data("air") == true:
+				if (tile_data == null or tile_data.get_custom_data("air") == true) and not occupancy.has(target_tile):
 					continue
 				move_layer.set_cell(target_tile, 0, Vector2i(0,0))
 

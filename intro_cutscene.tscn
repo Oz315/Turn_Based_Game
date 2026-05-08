@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c66g6mcgu5h07"]
+
+[ext_resource type="Texture2D" uid="uid://dqypsmtsp78xj" path="res://tiles/Black Block.png" id="1_rlq26"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvalt"]
+texture = ExtResource("1_rlq26")
+
+[node name="Control" type="Control" unique_id=1694005228]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1584185231]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lvalt")
+
+[node name="Label" type="Label" parent="." unique_id=519973873]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -331.0
+offset_top = -184.0
+offset_right = 331.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I'll eventually work  this intro cutscene to basically be called when the player presses play
+then it should just come to this scene where we timeout, display the story text, and
+then move to the main scene which continues the game as normal"

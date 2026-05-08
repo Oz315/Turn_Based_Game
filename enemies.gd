@@ -82,7 +82,9 @@ func take_turn():
 func first_playable_attack(player: Node2D):
 	var positions = actions.hint(self, level)
 	for position in positions:
+		print("trying to find the player")
 		if level.occupancy.get(position) is Player:
+			print("can see player")
 			await actions.execute(self, positions.pick_random(), level)
 			break;
 

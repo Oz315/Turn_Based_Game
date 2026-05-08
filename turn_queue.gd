@@ -1,6 +1,9 @@
 extends Node2D
 
 var current_turn = 1
+
+func reset_turns_count():
+	current_turn = 1
 #Turn queue is weird because we're loading all levels
 func enemies_turn():
 	var enemies = get_tree().get_nodes_in_group("enemy_units")

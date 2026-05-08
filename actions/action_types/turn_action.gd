@@ -6,16 +6,12 @@ extends Resource
 ## Add helpers to this class if they can be resused across attacks, like walkable_cells()
 
 class_name TurnAction
-
-
 @export var icon: Texture2D = preload("res://actions/icons/no_icon_attack.png")
 @export var name: String = "Unnamed Attack"
 @export var sprites: SpriteFrames
 
 @export var max_health: int = 10
 @export var move_range: int = 2
-@export var min_distance: int = 1
-@export var max_distance: int = 1
 # use the levels ASTAR grid to find walkable cells within a given range
 func walkable_cells(pos: Vector2i, range: int, level: Level) -> Array[Vector2i]:
 	var cells: Array[Vector2i] = []

@@ -11,6 +11,8 @@ class_name TurnAction
 @export var name: String = "Unnamed Attack"
 @export var tooltip: String = "If you are reading this you forgot to specialize the tooltip for your new attack"
 
+## Helper class to hold a position and damage amount.
+## Represents the damage a tile will recieve from an attack next turn
 class DamageHint:
 	var dmg: int
 	var target: Vector2i
@@ -21,9 +23,7 @@ func make_hint(target: Vector2i, dmg: int) -> DamageHint:
 	h.target = target
 	return h
 
-# Which cells would take damage from this attack?
-func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
-	return []
+
 
 # use the levels ASTAR grid to find walkable cells within a given range
 func walkable_cells(pos: Vector2i, range: int, level: Level) -> Array[Vector2i]:
@@ -66,9 +66,15 @@ static func apply_damage(node: Node, dmg: int) -> bool:
 
 # override in attack scripts. See melee_action.gd
 
-## Pick a random cell to attack, even if there is nothing there
+## Pick a random cell to attack, even if there is nothing there. 
+## At this point this is basically the enemy attack AI so maybe it should go into
+## the enemy resources, if they only have one or two attacks?
 func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
 	return target
+
+# Which cells would take damage from this attack?
+func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
+	return []
 
 ## Return an array of all grid positions that are valid targets for this action
 func hint(caller: Node2D, level: Level) -> Array[Vector2i]:

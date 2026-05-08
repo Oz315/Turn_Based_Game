@@ -36,9 +36,7 @@ func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
 	return caller_pos + dir * range
 	
 	
-
 func hint(caller: Node2D, level: Level) -> Array[Vector2i]:
-	
 	# iterate over everyone other than the player and show a hint
 	# at their position if they are within range
 	

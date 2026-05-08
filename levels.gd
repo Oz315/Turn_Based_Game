@@ -36,12 +36,14 @@ func initialize():
 		unit.level = self #updates the variable level in enemies and player
 	SignalBus.any_moved.connect(_on_any_moved)
 	SignalBus.any_died.connect(_on_any_moved)
+
 	SignalBus.player_turn.connect(_on_player_turn)
-	
-	# HACK: Im not sure where to put this, but player turns seem to happen without 
+
+	# HACK: Im not sure where to put this, but player turns seem to happen without
 	# the turn() function at the start of each level
 	SignalBus.player_turn.emit(player)
-		
+
+
 
 func tile_pos(node: Node2D):
 	return tile_map.local_to_map(node.global_position)
@@ -69,6 +71,9 @@ func update_occupancy():
 
 #This is in levels so we only have to generate it every new level, from my understanding most of these commands are
 #just standard protocol when making an AStarGrid2D, I got this from a Youtube Tutorial btw
+# Diagonal movement is now possible, within the WalkableTiles there is now a black tile
+# which should just be treated as a tile you can walk pass but never land on, put it for corners where you
+# want the player to step up
 func make_grid():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
@@ -82,13 +87,13 @@ func make_grid():
 				x + tile_map.get_used_rect().position.x,
 				y + tile_map.get_used_rect().position.y
 			)
-		
+
 			var tile_data = tile_map.get_cell_tile_data(tile_position)
 			#This ground_data is so that it checks if there is "ground" beneath the player so that they
 			#don't just fly into the sky
-			
+
 			#its a long if statement but just checking for the custom data
-			if tile_data == null or tile_data.get_custom_data("walkable")  == false:
+			if tile_data == null:
 				astar_grid.set_point_solid(tile_position)
 
 #this function is what paints over the black outline for where the player can move
@@ -100,9 +105,12 @@ func _move_range(player_pos, range):
 	for x in range(-range, range+1):
 		for y in range(-range, range+1):
 			var target_tile = player_tile + Vector2i(x,y)
-			
+
 			var path = astar_grid.get_id_path(player_tile, target_tile)
 			if path.size() > 0 and path.size() <= range+1:
+				var tile_data = tile_map.get_cell_tile_data(target_tile)
+				if (tile_data == null or tile_data.get_custom_data("air") == true) and not occupancy.has(target_tile):
+					continue
 				move_layer.set_cell(target_tile, 0, Vector2i(0,0))
 
 
@@ -110,10 +118,10 @@ func cell_on_ground(pos: Vector2i) -> bool:
 	if ground_layer == null:
 		return false
 	# "on ground" if there is a foreground cell beneath it but no cell at the position
-	
+
 	# allow fire to be placed on fire
 	var occupied = ground_layer.get_cell_source_id(pos) != -1 and ground_layer.get_cell_source_id(pos) != 13
-	
+
 	# disallow fire to be placed over air, fire, platforms, or water
 	var denylist: Array[int] = [-1,  13, 5, 12]
 	var floating = denylist.has(ground_layer.get_cell_source_id(pos + Vector2i(0, 1)))
@@ -122,7 +130,7 @@ func cell_on_ground(pos: Vector2i) -> bool:
 func update_flaming_tiles():
 	var to_remove: Array[Vector2i] = []
 	for pos in flaming_tiles:
-		
+
 		var t = flaming_tiles[pos]
 		t -= 1
 		flaming_tiles[pos] = t

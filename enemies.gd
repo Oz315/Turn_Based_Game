@@ -41,7 +41,7 @@ func _ready():
 	health_bar.value = health_component.health
 	$AnimatedSprite2D.sprite_frames = enemy_type.sprites
 	$AnimatedSprite2D.play("static")
-	
+
 	# HACK: hard-code the first attack intent
 	next_attack = enemy_type.actions[0]
 	intent_icon.action = next_attack
@@ -56,10 +56,10 @@ func _on_health_depleted():
 
 	# update the occupancy map
 	SignalBus.any_died.emit(self)
-	
+
 	# apparently you need to disconnect signals
 	level.occupancy_changed.disconnect(_on_occupancy_changed)
-	
+
 	# die, somehow
 	# TODO
 	queue_free()
@@ -78,17 +78,17 @@ func take_turn():
 	if not player:
 		#should have some code here to end the game, maybe have the player be able to replay the level
 		return
-	
+
 	await play_next_attack(player)
-	
+
 	player = get_tree().get_first_node_in_group("player_units")
 	if player == null or not is_instance_valid(player):
 		#should have some code here to end the game, maybe have the player be able to replay the level
 		return
-	
+
 	next_attack = null
 	update_intent()
-	
+
 	#level.occupancy.erase(level.tile_map.local_to_map(global_position))
 	var id_path = level.astar_grid.get_id_path(
 		level.tile_map.local_to_map(global_position),
@@ -97,59 +97,61 @@ func take_turn():
 		#This limits movement to two tiles increase this and the 2 in slice for different movement
 	if id_path.size() > enemy_type.move_range:
 		id_path = id_path.slice(0, enemy_type.move_range)
-	while id_path.is_empty() == false and level.occupancy.has(id_path[-1]):
-		id_path.pop_back()
+	while id_path.is_empty() == false:
+		var tile_data = level.tile_map.get_cell_tile_data(id_path[-1])
+		if (tile_data != null and tile_data.get_custom_data("air") == true) or level.occupancy.has(id_path[-1]):
+			id_path.pop_back()
+		else:
+			break
+
 	if id_path.is_empty() == false:
 		current_id_path = id_path
-	#level.occupancy[level.tile_map.local_to_map(global_position)] = self
-	
+
 	is_moving = true
-	
+
 	# hide damage hints while moving
 	level.remove_damage_hints(current_damage_hints)
 	await done_moving
 	level.add_damage_hints(current_damage_hints)
-	
+
 	# If the player isn't dead yet, play choose another attack and update intents
 	if is_instance_valid(player):
 		first_playable_attack(player)
-		
-	
+
+
 func play_next_attack(player: Player):
 	# just do what the hint last turn said we would do
 	if next_attack.validate(self, next_attack_target, level):
 		await next_attack.execute(self, next_attack_target, level)
-	
+
 	#var positions = next_attack.hint(self, level)
 	#for position in positions:
 		#if level.occupancy.get(position) is Player:
 			#await next_attack.execute(self, positions.pick_random(), level)
-	
+
 
 ## Just play the first attack on any target you can
 func first_playable_attack(player: Player) -> void:
 	for action in enemy_type.actions:
 		var positions = action.hint(self, level)
-		for position in positions:
-			if level.occupancy.get(position) is Player:
+		for pos in positions:
+			if level.occupancy.get(pos) is Player:
 				next_attack = action;
-				next_attack_target = position
+				next_attack_target = pos
 	next_attack = enemy_type.actions[0]
 	next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
 	update_intent()
-	
-
 
 func update_intent():
 	intent_icon.action = next_attack
 	intent_icon.update()
 	if next_attack == null:
 		return
-	
+
 	level.remove_damage_hints(current_damage_hints)
 	current_damage_hints = next_attack.damage_hint(self, next_attack_target, level)
 	level.add_damage_hints(current_damage_hints)
-	
+
 
 func _on_occupancy_changed():
 	if is_queued_for_deletion():
@@ -167,11 +169,10 @@ func _physics_process(delta):
 			is_moving = false
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
-	
+
 	$AnimatedSprite2D.play("walk")
 	global_position = global_position.move_toward(target_position, 2)
-	
+
 	if global_position == target_position:
 		current_id_path.pop_front()
 		$AnimatedSprite2D.stop()
-		

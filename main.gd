@@ -5,8 +5,13 @@ extends Node2D
 # first place
 var level_list = [
 	"res://all_levels/level1.tscn",
+<<<<<<< HEAD
 	"res://all_levels/level2.tscn",
 	"res://all_levels/level3.tscn"
+=======
+	"res://all_levels/level2.tscn"#,
+	#"res://all_levels/level3.tscn"
+>>>>>>> a84fe198b7048f295be55847e53a2f805f8eabb4
 ]
 
 #this is a temporary fix to a problem i was having
@@ -24,6 +29,7 @@ func _ready():
 	$HUD.fade_out()
 	SignalBus.any_died.connect(_on_unit_died)
 	SignalBus.inc_turn.connect(turn_update)
+	SignalBus.reset_turns.connect($TurnQueue.reset_turns_count)
 #making this a function so we can call it to load the other levels
 
 func turn_update(current_turn: int):
@@ -45,7 +51,10 @@ func load_level(level):
 	new_level.initialize()
 	await $HUD.fade_out()
 	$HUD.update_turns(1, new_level.turn_limit)
+	SignalBus.reset_turns.emit()
+	$TurnQueue.player_turn()
 	print("loaded level ", level)
+	
 	in_level_transition = false
 
 

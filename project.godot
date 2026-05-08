@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CS330-Test2"
-run/main_scene="uid://tnsa4cdericw"
+run/main_scene="uid://de7874jgdp7e0"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

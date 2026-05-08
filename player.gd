@@ -91,7 +91,9 @@ func _input(event):
 		).slice(1)
 		#This limits the player to moving two tiles, if you want to change it make sure you also change the max_range in the 
 		#level script show_range func
-		if id_path.is_empty() == false and (id_path.size() > 0 and id_path.size() <= 2):
+		var target_data = level.tile_map.get_cell_tile_data(level.tile_map.local_to_map(get_global_mouse_position()))
+		var on_air = target_data != null and target_data.get_custom_data("air") == true
+		if id_path.is_empty() == false and (id_path.size() > 0 and id_path.size() <= 2) and not on_air and not level.occupancy.has(level.tile_map.local_to_map(get_global_mouse_position())):
 			current_id_path = id_path
 			is_moving = false
 			level.move_layer.clear()

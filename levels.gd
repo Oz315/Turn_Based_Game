@@ -113,6 +113,28 @@ func _move_range(player_pos, range):
 					continue
 				move_layer.set_cell(target_tile, 0, Vector2i(0,0))
 
+## Used by ranged_action.gd to stop arrows from going through solid objects.
+## A separate function because I wasn't sure which tilemap would be best
+func blocks_projectiles(pos: Vector2i) -> bool:
+	var walkable = tile_map.get_cell_source_id(pos) != -1
+	var empty = ground_layer.get_cell_source_id(pos) == -1
+	return not walkable and not empty
+
+## return the closest cell that is not obstructed, snapped to linear/axis-aligned directions
+func axis_aligned_raycast(origin: Vector2i, target: Vector2i, max_range: int = 30):
+	var dir: Vector2i = sign(target - origin)
+	if dir.y != 0 and dir.x != 0:
+		if abs(dir.y) > abs(dir.x):
+			dir.x = 0
+		else:
+			dir.y = 0
+	var pos: Vector2i = origin
+	for i in range(max_range):
+		if blocks_projectiles(pos + dir):
+			break
+		pos += dir
+	return pos
+	
 
 func cell_on_ground(pos: Vector2i) -> bool:
 	if ground_layer == null:

@@ -10,11 +10,13 @@ class_name RangedAction
 @export var animation_name: String = "attack"
 @export var projectile_scene: PackedScene = preload("res://actions/projectiles/basic_projectile.tscn")
 
+@export var always_shoot_max_range: bool = true
 
 func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
 	var caller_pos = level.tile_pos(caller)
-	if validate(caller, target, level):
-		return target
+	# target a closer tile if the target is closer than max range
+	#if validate(caller, target, level):
+		#return target
 	var dir: Vector2i = (target - caller_pos)
 	if dir.y != 0 and dir.x != 0:
 		if abs(dir.y) > abs(dir.x):
@@ -25,20 +27,23 @@ func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
 
 func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:
 	var caller_pos = level.tile_pos(caller)
+	var raycast_target: Vector2i = target
+	if always_shoot_max_range:
+		raycast_target += (target - caller_pos) * max_range
 	if validate(caller, target, level):
-		var dst = target.distance_to(caller_pos)
-		var a: Array[DamageHint] = []
-		var dir: Vector2i = sign(target - caller_pos)
-		if dir.y != 0 and dir.x != 0:
-			dir.y = 0
-			
-		if dir.y == 0:
-			for x in range(min_range, max_range + 1):
-				a.append(make_hint(caller_pos + Vector2i(x * dir.x, 0), damage))
-		else:
-			for y in range(min_range, max_range + 1):
-				a.append(make_hint(caller_pos + Vector2i(0, y * dir.y), damage))
 		
+		var a: Array[DamageHint] = []
+		var hit: Vector2i = level.axis_aligned_raycast(caller_pos, target, max_range)
+		var pos: Vector2i = caller_pos
+		var dir = (hit - caller_pos).sign()
+		var dst: int = 0
+		while true:
+			if dst > min_range and dst <= max_range:
+				a.append(make_hint(pos, damage))
+			if pos == hit or pos == target and not always_shoot_max_range:
+				break
+			pos += dir
+			dst += 1
 		return a
 	return []
 
@@ -77,18 +82,37 @@ func execute(caller: Node2D, target:Vector2i, level: Level):
 		anim_player.play(animation_name)
 		await caller.action_strike
 	
+	var damage_hints = damage_hint(caller, target, level)
+	
+	# HACK: assumes the damage hints are ordered by arrow travel, i.e. closest first
+	var arrow_target_hint = damage_hints.back()
+	
+	# no damage
+	if arrow_target_hint == null:
+		projectile.queue_free()
+		return
+		
 	# wait for the projectile to impact so the turn doesn't end while things are
 	# still happening
-	await projectile.launch(level.tile_pos(caller), target, projecile_speed, level)
+	await projectile.launch(level.tile_pos(caller), arrow_target_hint.target, projecile_speed, level)
 	
-	var target_node = level.occupancy.get(target)
+	var stuck_in_target: bool = false
 	
-	if target_node != null:
-		# leave the arrow in the target for fun
-		projectile.reparent(target_node, true)
-		apply_damage(target_node, damage)
-	else:
+	# use the damage hints so the damage always lines up with expectations
+	for hint in damage_hints:
+		var target_node = level.occupancy.get(hint.target)
+		
+		if target_node != null:
+			apply_damage(target_node, damage)
+			
+			# leave the arrow in the target for fun
+			if not always_shoot_max_range and hint.target == target:
+				projectile.reparent(target_node, true)
+				stuck_in_target = true
+				
+	if not stuck_in_target:
 		projectile.queue_free()
+		
 	
 	if anim_player != null && anim_player.is_playing():
 		await anim_player.animation_finished

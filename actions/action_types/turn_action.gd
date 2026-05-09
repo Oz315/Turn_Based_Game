@@ -52,6 +52,33 @@ static func health_component(node: Node) -> HealthComponent:
 			return child
 	return null
 
+static func keep_dominant_axis(v: Vector2i) -> Vector2i:
+	if abs(v.x) >  abs(v.y):
+		return Vector2i(v.x, 0)
+	else:
+		return Vector2i(0, v.y)
+
+## Takes occlusion into account, won't point into a wall if it can help it
+static func approx_linear_direction(source: Vector2i, target: Vector2i, level: Level, offset: int = 0) -> Vector2i:
+	var v: Vector2i = target - source
+	var c: Array[Vector2i] = []
+	if abs(v.x) >  abs(v.y):
+		c.append(Vector2i(v.x, 0))
+		c.append(Vector2i(0, v.y))
+		c.append(Vector2i(0, -v.y))
+		c.append(Vector2i(-v.x, 0))
+	else:
+		c.append(Vector2i(v.x, 0))
+		c.append(Vector2i(0, v.y))
+		c.append(Vector2i(0, -v.y))
+		c.append(Vector2i(-v.x, 0))
+	for candidate in c:
+		if not level.blocks_projectiles(source + sign(candidate) + sign(candidate) * offset):
+			return sign(candidate)
+	return Vector2i(1, 0)
+	
+	
+
 ## returns true if damage was applied, false otherwise
 static func apply_damage(node: Node, dmg: int) -> bool:
 	if node == null:

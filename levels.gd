@@ -123,8 +123,9 @@ func blocks_projectiles(pos: Vector2i) -> bool:
 ## return the closest cell that is not obstructed, snapped to linear/axis-aligned directions
 func axis_aligned_raycast(origin: Vector2i, target: Vector2i, max_range: int = 30):
 	var dir: Vector2i = sign(target - origin)
-	if dir.y != 0 and dir.x != 0:
-		if abs(dir.y) > abs(dir.x):
+	var dif: Vector2i = (target - origin)
+	if dif.y != 0 and dif.x != 0:
+		if abs(dif.y) > abs(dif.x):
 			dir.x = 0
 		else:
 			dir.y = 0

@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cyxb50m3ggmww"]
+
+[ext_resource type="Texture2D" uid="uid://bd8j1hlbo3aef" path="res://PIXEL ART/Player1.PNG" id="1_hrvay"]
+[ext_resource type="Texture2D" uid="uid://bkmop1kmce0su" path="res://PIXEL ART/Player1Walking.PNG" id="2_sm4ac"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hrvay")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hrvay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sm4ac")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]

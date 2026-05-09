@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ckovbc5yokidr"]
+
+[ext_resource type="Texture2D" uid="uid://b3pathmspwdjs" path="res://PIXEL ART/Snake Spear.png" id="1_1nguj"]
+[ext_resource type="Texture2D" uid="uid://bqaueb7jimg3w" path="res://PIXEL ART/Snake Spear Moving.png" id="2_31w1n"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1nguj")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1nguj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_31w1n")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]

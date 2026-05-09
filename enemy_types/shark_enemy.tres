@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://bk6pqq2rwhwt"]
 
+[ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="1_gu6fx"]
 [ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="1_ugcvd"]
 [ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="2_h7do3"]
 [ext_resource type="SpriteFrames" uid="uid://g1l0bkevs6ea" path="res://PIXEL ART/shark_knight.tres" id="3_h7do3"]

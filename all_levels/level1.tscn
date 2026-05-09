@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dhu7wys2v8med" path="res://all_levels/levels.tscn" id="1_u78km"]
 [ext_resource type="PackedScene" uid="uid://d07g2jscftu7p" path="res://player.tscn" id="2_kmwu4"]
 [ext_resource type="PackedScene" uid="uid://42ssi35bexms" path="res://enemies.tscn" id="3_g8gig"]
+[ext_resource type="Resource" uid="uid://cbhmvsrmvh280" path="res://enemy_types/gorilla_enemy.tres" id="4_452tj"]
 [ext_resource type="Resource" uid="uid://d3iitgj2y1x7i" path="res://enemy_types/frog_enemy.tres" id="4_g8gig"]
 
 [node name="Levels" unique_id=1950013390 instance=ExtResource("1_u78km")]
@@ -24,6 +25,7 @@ position = Vector2(-48, -16)
 
 [node name="Enemy1" parent="Units" parent_id_path=PackedInt32Array(841793513) index="1" unique_id=184206467 instance=ExtResource("3_g8gig")]
 position = Vector2(176, -80)
+enemy_type = ExtResource("4_452tj")
 
 [node name="Enemy2" parent="Units" parent_id_path=PackedInt32Array(841793513) index="2" unique_id=908270760 instance=ExtResource("3_g8gig")]
 position = Vector2(-336, -176)

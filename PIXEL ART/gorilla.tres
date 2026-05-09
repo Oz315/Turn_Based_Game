@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bx6w8ddm0u4pi"]
+
+[ext_resource type="Texture2D" uid="uid://dmvct3g47rvsc" path="res://PIXEL ART/Gorilla Club.png" id="1_iqnfv"]
+[ext_resource type="Texture2D" uid="uid://dt8wd2dbsgpg2" path="res://PIXEL ART/Gorilla Club Moving.png" id="2_l0fms"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iqnfv")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iqnfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l0fms")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]

@@ -149,10 +149,10 @@ func _physics_process(delta):
 			SignalBus.any_moved.emit()
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
-	
+	$AnimatedSprite2D.play("walk")
 	#The 2 here just modifies the speed at which the player moves to its target tile
 	global_position = global_position.move_toward(target_position, 2)
 	
 	if global_position == target_position:
-		
 		current_id_path.pop_front()
+		$AnimatedSprite2D.stop()

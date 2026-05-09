@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dxg4a2077r23t"]
+
+[ext_resource type="Texture2D" uid="uid://bfbmvph3bhmyj" path="res://PIXEL ART/Monkey Knife.png" id="1_jticw"]
+[ext_resource type="Texture2D" uid="uid://d4lhlfonmolca" path="res://PIXEL ART/Monkey Knife Moving.png" id="2_j7nuw"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jticw")
+}],
+"loop": true,
+"name": &"static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jticw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j7nuw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 11.0
+}]

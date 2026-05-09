@@ -142,6 +142,12 @@ func first_playable_attack(player: Player) -> void:
 	next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
 	update_intent()
 
+func best_tile_to_move_to(player_tile: Vector2i) -> Vector2i:
+	var enemy_tile = level.tile_map.local_to_map(global_position)
+	if next_attack == null: return player_tile
+	var best_tile = player_tile
+	
+	return best_tile
 func update_intent():
 	intent_icon.action = next_attack
 	intent_icon.update()

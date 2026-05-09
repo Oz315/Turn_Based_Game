@@ -17,12 +17,8 @@ func random_target(caller: Node2D, target: Vector2i, level: Level) -> Vector2i:
 	# target a closer tile if the target is closer than max range
 	#if validate(caller, target, level):
 		#return target
-	var dir: Vector2i = (target - caller_pos)
-	if dir.y != 0 and dir.x != 0:
-		if abs(dir.y) > abs(dir.x):
-			dir.x = 0
-		else:
-			dir.y = 0
+	var relative = target - caller_pos
+	var dir: Vector2i = sign(approx_linear_direction(caller_pos, target, level, min_range))
 	return caller_pos + dir.sign() * max_range
 
 func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageHint]:

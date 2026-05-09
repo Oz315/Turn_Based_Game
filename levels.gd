@@ -131,7 +131,7 @@ func axis_aligned_raycast(origin: Vector2i, target: Vector2i, max_range: int = 3
 			dir.y = 0
 	var pos: Vector2i = origin
 	for i in range(max_range):
-		if blocks_projectiles(pos + dir):
+		if blocks_projectiles(pos + dir) or pos == target:
 			break
 		pos += dir
 	return pos

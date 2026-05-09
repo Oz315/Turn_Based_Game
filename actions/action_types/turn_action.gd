@@ -73,7 +73,9 @@ static func approx_linear_direction(source: Vector2i, target: Vector2i, level: L
 		c.append(Vector2i(0, -v.y))
 		c.append(Vector2i(-v.x, 0))
 	for candidate in c:
-		if not level.blocks_projectiles(source + sign(candidate) + sign(candidate) * offset):
+		# first cell outside the offset
+		var raycast_target = source + sign(candidate) + sign(candidate) * offset
+		if level.axis_aligned_raycast(source, raycast_target) == raycast_target:
 			return sign(candidate)
 	return Vector2i(1, 0)
 	

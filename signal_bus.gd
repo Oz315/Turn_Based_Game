@@ -11,3 +11,4 @@ signal inc_turn()
 signal player_turn(player: Player)
 signal any_died(unit)
 signal reset_turns
+signal retry

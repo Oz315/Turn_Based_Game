@@ -25,6 +25,7 @@ func _ready():
 	SignalBus.any_died.connect(_on_unit_died)
 	SignalBus.inc_turn.connect(turn_update)
 	SignalBus.reset_turns.connect($TurnQueue.reset_turns_count)
+	SignalBus.retry.connect(retry_level)
 #making this a function so we can call it to load the other levels
 
 func turn_update(current_turn: int):
@@ -35,8 +36,7 @@ func turn_update(current_turn: int):
 	else:
 		print("cant find labels")
 	if current_turn > level.turn_limit:
-		print("turn limit reached, you lose")
-		#should end game
+		show_game_over("turns")
 
 func load_level(level):
 	for child in $Levels.get_children():
@@ -62,7 +62,21 @@ func _on_unit_died(unit):
 	var enemies = get_tree().get_nodes_in_group("enemy_units")
 	if enemies.is_empty() or enemies.size() == 1 and enemies[0] == unit:
 		advance_level()
+	var player = get_tree().get_nodes_in_group("player_units")
+	if player.is_empty():
+		# couldn't think of a better way than this though there should be one, I can't think of it right now
+		show_game_over("health")
 
+func retry_level():
+	in_level_transition = true
+	load_level(level_list[current_level])
+
+func show_game_over(how: String):
+	await $HUD.fade_in()
+	var game_over_scene = load("res://game_over_screen.tscn").instantiate()
+	game_over_scene.lose_message(how)
+	# If we don't add it to the canvas layer of HUD, it gets a bit buggy
+	$HUD.add_child(game_over_scene)
 
 func advance_level():
 	in_level_transition = true

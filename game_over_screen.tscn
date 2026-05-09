@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://dntvkw71gt1gb"]
+
+[ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="1_gt22q"]
+[ext_resource type="Script" uid="uid://cftss4s2d1bhs" path="res://game_over_screen.gd" id="1_w3hxg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3hxg"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4tlu"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdghx"]
+bg_color = Color(0.66245234, 0.66245234, 0.6624523, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2yv1s"]
+bg_color = Color(0.728822, 0.728822, 0.728822, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmhko"]
+
+[node name="Control" type="Control" unique_id=1116966158]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w3hxg")
+
+[node name="Panel" type="Panel" parent="." unique_id=1186569536]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w3hxg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=223743488]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -482.5
+offset_top = -46.0
+offset_right = 482.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 450
+alignment = 1
+
+[node name="Retry" type="Button" parent="HBoxContainer" unique_id=1480501422]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_gt22q")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fdghx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2yv1s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tmhko")
+text = "Retry"
+
+[node name="Quit" type="Button" parent="HBoxContainer" unique_id=1165928560]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_gt22q")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fdghx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2yv1s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_l4tlu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tmhko")
+text = "Give Up"
+
+[node name="WarningMessage" type="Label" parent="." unique_id=1265497869]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.809
+anchor_top = 0.62200004
+anchor_right = 0.809
+anchor_bottom = 0.62200004
+offset_left = -118.96802
+offset_top = -26.05603
+offset_right = 120.03198
+offset_bottom = 15.94397
+theme_override_font_sizes/font_size = 8
+text = "Warning! 
+There is no saving so giving up means losing all your progress!"
+horizontal_alignment = 1
+
+[node name="FailureMessage" type="Label" parent="." unique_id=2001752183]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.16900001
+anchor_right = 0.5
+anchor_bottom = 0.16900001
+offset_left = -237.0
+offset_top = -30.512009
+offset_right = 241.0
+offset_bottom = 73.48799
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_gt22q")
+theme_override_font_sizes/font_size = 50
+text = "You failed!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="HBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]

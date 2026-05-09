@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dgdjkgny6e7eh" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://onj4cnrlqutm" path="res://hud.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cclxfhhjjd7ky" path="res://camera_2d.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://cbnyytx41532c" path="res://turn_queue.gd" id="3_1bvp3"]
 
 [node name="Main" type="Node2D" unique_id=1108824690]
 script = ExtResource("1_1bvp3")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1975011290]
+script = ExtResource("2_1bvp3")
 
 [node name="Levels" type="Node2D" parent="." unique_id=652559717]
 

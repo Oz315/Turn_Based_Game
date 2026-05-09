@@ -3,13 +3,10 @@
 [ext_resource type="FontFile" uid="uid://ddd2cvyo1luj5" path="res://fonts/TaylorGothic.otf" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://ddsq6nxe0u2jp" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://dqypsmtsp78xj" path="res://tiles/Black Block.png" id="2_jix8l"]
+[ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="3_jix8l"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("2_jix8l")
-
-[sub_resource type="FontVariation" id="FontVariation_7vrkn"]
-base_font = ExtResource("1_06t4h")
-baseline_offset = 0.1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
 bg_color = Color(1, 1, 1, 1)
@@ -79,7 +76,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("FontVariation_7vrkn")
+theme_override_fonts/font = ExtResource("3_jix8l")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_fu7sn")
@@ -100,7 +97,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("FontVariation_7vrkn")
+theme_override_fonts/font = ExtResource("3_jix8l")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_fu7sn")

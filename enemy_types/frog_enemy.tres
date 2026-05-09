@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://d3iitgj2y1x7i"]
+
+[ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="1_iuwj0"]
+[ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="1_ni80u"]
+[ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="2_ni80u"]
+[ext_resource type="SpriteFrames" uid="uid://d3kc3rlniwxkv" path="res://PIXEL ART/frog_archer.tres" id="3_iuwj0"]
+
+[resource]
+script = ExtResource("2_ni80u")
+sprites = ExtResource("3_iuwj0")
+actions = Array[ExtResource("1_iuwj0")]([ExtResource("1_ni80u")])
+metadata/_custom_type_script = "uid://d0tgudynvd5o7"

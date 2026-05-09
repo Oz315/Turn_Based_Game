@@ -65,3 +65,8 @@ func _on_end_turn_pressed():
 	lock_ui(true)
 	end_turn.emit()
 	#print("group call done for end turn")
+
+func _on_confirm_attack_pressed() -> void:
+	var player = get_tree().get_first_node_in_group("player_units")
+	if player is Player:
+		player._on_confirm_attack()

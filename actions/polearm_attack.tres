@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("2_wgcwg")
-damage = 1
 range = 3
+damage = 1
 icon = ExtResource("1_vrq2j")
 name = "Polearm"
+tooltip = "Deals less damage but has longer range"
 metadata/_custom_type_script = "uid://41iyg81l0i8"

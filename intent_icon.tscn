@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://5xqawmyc0crr"]
+
+[ext_resource type="Script" uid="uid://di4k5j8btxyxt" path="res://intent_icon.gd" id="1_ythwi"]
+[ext_resource type="Resource" uid="uid://dperug3efyr5w" path="res://actions/dev_gun.tres" id="2_ma8ck"]
+[ext_resource type="Texture2D" uid="uid://7f1sdjfrx1j0" path="res://actions/icons/no_icon_attack.png" id="3_vfulj"]
+
+[sub_resource type="Gradient" id="Gradient_vfulj"]
+offsets = PackedFloat32Array(0, 0.7251908, 0.84351146, 0.98346055)
+colors = PackedColorArray(0.1900694, 0.09265398, 0.02720799, 1, 0.27922243, 0.14432046, 0.073795505, 1, 0.19413766, 0.18501008, 0.16940644, 1, 0.21934143, 0.1598346, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_upr7j"]
+frequency = 0.5328
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1b26i"]
+width = 32
+height = 32
+noise = SubResource("FastNoiseLite_upr7j")
+color_ramp = SubResource("Gradient_vfulj")
+seamless = true
+
+[node name="IntentIcon" type="Node2D" unique_id=1256735308 node_paths=PackedStringArray("icon", "background", "label")]
+script = ExtResource("1_ythwi")
+action = ExtResource("2_ma8ck")
+icon = NodePath("PanelContainer/VBoxContainer/TextureRect")
+background = NodePath("PanelContainer/TextureRect2")
+label = NodePath("PanelContainer/VBoxContainer/Label")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1344246163]
+offset_left = -16.0
+offset_top = -18.0
+offset_right = 17.0
+offset_bottom = 14.0
+size_flags_vertical = 3
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer" unique_id=1775632984]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_1b26i")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=2060136899]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=1817460824]
+layout_mode = 2
+texture = ExtResource("3_vfulj")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=195242759]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "This text and icon should update once the game starts"
+autowrap_mode = 2
+
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]

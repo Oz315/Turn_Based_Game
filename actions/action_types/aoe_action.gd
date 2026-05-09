@@ -49,7 +49,8 @@ func damage_hint(caller: Node2D, target:Vector2i, level: Level) -> Array[DamageH
 		var a: Array[DamageHint] = []
 		for x in range(-aoe_range, aoe_range + 1):
 			for y in range(-aoe_range, aoe_range + 1):
-				a.append(make_hint(target + Vector2i(x, y), damage))
+				var dmg: int = max(damage - min(abs(x), abs(y)) * falloff, 1)
+				a.append(make_hint(target + Vector2i(x, y), dmg))
 		return a
 	return []
 
@@ -93,18 +94,13 @@ func execute(caller: Node2D, target:Vector2i, level: Level):
 	
 	var target_node = level.occupancy.get(target)
 	
-	for pos in level.occupancy:
-		var dif = (pos - target).abs()
-		if max(dif.x, dif.y) <= aoe_range:
-			var opponent = level.occupancy[pos]
-			if opponent != caller or self_damage:
-				apply_damage(opponent, damage)
-	
-	if fire_duration > 0:
-		for x in range(-aoe_range, aoe_range + 1):
-			for y in range(-aoe_range, aoe_range + 1):
-				level.add_flaming_tile(target + Vector2i(x, y), fire_duration)
-	
+	for hint in damage_hint(caller, target, level):
+		target_node = level.occupancy.get(hint.target)
+		if target_node != null and (target_node != caller or self_damage):
+			apply_damage(target_node, hint.dmg)
+		if fire_duration > 0:
+			level.add_flaming_tile(hint.target, fire_duration)
+					
 	projectile.queue_free()
 	
 	if anim_player != null && anim_player.is_playing():

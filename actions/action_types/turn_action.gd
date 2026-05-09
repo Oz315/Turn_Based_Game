@@ -62,16 +62,18 @@ static func keep_dominant_axis(v: Vector2i) -> Vector2i:
 static func approx_linear_direction(source: Vector2i, target: Vector2i, level: Level, offset: int = 0) -> Vector2i:
 	var v: Vector2i = target - source
 	var c: Array[Vector2i] = []
+	
 	if abs(v.x) >  abs(v.y):
 		c.append(Vector2i(v.x, 0))
 		c.append(Vector2i(0, v.y))
 		c.append(Vector2i(0, -v.y))
 		c.append(Vector2i(-v.x, 0))
 	else:
-		c.append(Vector2i(v.x, 0))
 		c.append(Vector2i(0, v.y))
-		c.append(Vector2i(0, -v.y))
+		c.append(Vector2i(v.x, 0))
 		c.append(Vector2i(-v.x, 0))
+		c.append(Vector2i(0, -v.y))
+
 	for candidate in c:
 		# first cell outside the offset
 		var raycast_target = source + sign(candidate) + sign(candidate) * offset

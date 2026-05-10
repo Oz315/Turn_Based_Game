@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="3_fqt3r"]
 [ext_resource type="SpriteFrames" uid="uid://g1l0bkevs6ea" path="res://PIXEL ART/shark_knight.tres" id="4_5rkbg"]
 [ext_resource type="PackedScene" uid="uid://5xqawmyc0crr" path="res://intent_icon.tscn" id="5_1v8mu"]
+[ext_resource type="AudioStream" uid="uid://t1nhg2i58nuw" path="res://Gamemusic/enemies.ogg" id="6_e0nqx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqt3r"]
 
@@ -101,3 +102,9 @@ animation = &"static"
 
 [node name="IntentIcon" parent="." unique_id=1256735308 instance=ExtResource("5_1v8mu")]
 position = Vector2(0, -38)
+
+[node name="FootSteps" type="AudioStreamPlayer" parent="." unique_id=1131266812]
+stream = ExtResource("6_e0nqx")
+volume_db = 8.0
+autoplay = true
+parameters/looping = true

@@ -9,6 +9,10 @@ var current_id_path: Array[Vector2i]
 var has_moved = false
 var is_moving = false
 var is_in_move_animation = false
+@onready var footsteps = $FootSteps
+@onready var bow_sound = $Bow
+@onready var basic_attack_sound = $BasicAttack
+
 
 # Are we waiting on the player to choose a target for the attack?
 var is_attacking = false 
@@ -94,13 +98,18 @@ func _on_confirm_attack():
 		is_in_attack_animation = true
 		level.move_layer.clear()
 		current_hint.clear()
+		if current_action == actions[0]:
+			if !basic_attack_sound.playing:
+				basic_attack_sound.play()
+		else:
+			if !bow_sound.playing:
+				bow_sound.play()
 		await current_action.execute(self, current_action_target, level)
 		has_attacked = true
 		is_in_attack_animation = false
 		current_action = null
 		is_attacking = false
-
-
+		
 func _input(event):
 	if is_moving == false and is_attacking == false or event.is_action_pressed("click") == false or is_in_attack_animation or has_attacked:
 		return
@@ -136,7 +145,12 @@ func _input(event):
 	
 
 func _physics_process(delta):
+
 	if current_id_path.is_empty():
+
+		$AnimatedSprite2D.stop()
+		footsteps.stop()
+
 		if is_in_move_animation:
 			is_in_move_animation = false
 			
@@ -146,11 +160,20 @@ func _physics_process(delta):
 				
 			SignalBus.any_moved.emit()
 		return
+
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
+
 	$AnimatedSprite2D.play("walk")
+
+	if !footsteps.playing:
+		footsteps.play()
+
 	#The 2 here just modifies the speed at which the player moves to its target tile
 	global_position = global_position.move_toward(target_position, 2)
 	
 	if global_position == target_position:
 		current_id_path.pop_front()
-		$AnimatedSprite2D.stop()
+
+		if current_id_path.is_empty():
+			$AnimatedSprite2D.stop()
+			footsteps.stop()

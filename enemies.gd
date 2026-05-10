@@ -12,6 +12,9 @@ var current_id_path: Array[Vector2i]
 var target_tile: Vector2i
 var intent = false
 
+#music effects
+@onready var enemy_footsteps = $FootSteps
+
 
 
 signal done_moving
@@ -232,6 +235,8 @@ func _on_occupancy_changed():
 #Exact same as players
 func _physics_process(delta):
 	if current_id_path.is_empty():
+		enemy_footsteps.stop()
+		$AnimatedSprite2D.stop()
 		if is_moving:
 			SignalBus.any_moved.emit()
 			if level != null:
@@ -240,10 +245,14 @@ func _physics_process(delta):
 			is_moving = false
 		return
 	var target_position = level.tile_map.map_to_local(current_id_path.front())
-
 	$AnimatedSprite2D.play("walk")
+	
+	if !enemy_footsteps.playing:
+		enemy_footsteps.play()
 	global_position = global_position.move_toward(target_position, 2)
-
+	
 	if global_position == target_position:
 		current_id_path.pop_front()
-		$AnimatedSprite2D.stop()
+		if current_id_path.is_empty():
+			$AnimatedSprite2D.stop()
+			enemy_footsteps.stop()

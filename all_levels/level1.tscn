@@ -2,8 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dhu7wys2v8med" path="res://all_levels/levels.tscn" id="1_u78km"]
 [ext_resource type="PackedScene" uid="uid://d07g2jscftu7p" path="res://player.tscn" id="2_kmwu4"]
+[ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="3_dmsvk"]
 [ext_resource type="PackedScene" uid="uid://42ssi35bexms" path="res://enemies.tscn" id="3_g8gig"]
 [ext_resource type="Resource" uid="uid://d3iitgj2y1x7i" path="res://enemy_types/frog_enemy.tres" id="4_g8gig"]
+[ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="4_t3xjx"]
+[ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="6_mm5ak"]
 
 [node name="Levels" unique_id=1950013390 instance=ExtResource("1_u78km")]
 
@@ -21,6 +24,7 @@ tile_map_data = PackedByteArray("AAD0/wAAAAACAAMAAADz/wAAAAACAAMAAAAKAAAAAAACAAM
 
 [node name="Player" parent="Units" parent_id_path=PackedInt32Array(841793513) index="0" unique_id=2078899362 instance=ExtResource("2_kmwu4")]
 position = Vector2(-48, -16)
+actions = Array[ExtResource("3_dmsvk")]([ExtResource("4_t3xjx"), ExtResource("6_mm5ak")])
 
 [node name="Enemy1" parent="Units" parent_id_path=PackedInt32Array(841793513) index="1" unique_id=184206467 instance=ExtResource("3_g8gig")]
 position = Vector2(176, -80)

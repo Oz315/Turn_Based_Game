@@ -75,8 +75,11 @@ func show_game_over(how: String):
 	await $HUD.fade_in()
 	var game_over_scene = load("res://game_over_screen.tscn").instantiate()
 	game_over_scene.lose_message(how)
-	# If we don't add it to the canvas layer of HUD, it gets a bit buggy
+	# If we don't add it to the canvas layer of HUD, it can get a bit buggy
 	$HUD.add_child(game_over_scene)
+
+func game_win():
+	get_tree().change_scene_to_file("res://game_win.tscn")
 
 func advance_level():
 	in_level_transition = true
@@ -87,5 +90,4 @@ func advance_level():
 	if current_level < level_list.size():
 		load_level(level_list[current_level])
 	else:
-		#should have some signal to hud to print a victory screen
-		print("you win")
+		game_win()

@@ -10,7 +10,6 @@ class_name TurnAction
 @export var icon: Texture2D = preload("res://actions/icons/no_icon_attack.png")
 @export var name: String = "Unnamed Attack"
 @export var tooltip: String = "If you are reading this you forgot to specialize the tooltip for your new attack"
-
 ## Helper class to hold a position and damage amount.
 ## Represents the damage a tile will recieve from an attack next turn
 class DamageHint:

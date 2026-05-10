@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dmjicn3el30ue" path="res://actions/dynamite_attack.tres" id="4_dw050"]
 [ext_resource type="Script" uid="uid://bv0aoeby5lp7e" path="res://health_component.gd" id="4_hqtel"]
 [ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="5_dw050"]
+[ext_resource type="Resource" uid="uid://bn5h3kqu77hvj" path="res://actions/big_attack.tres" id="6_dw050"]
 [ext_resource type="SpriteFrames" uid="uid://cyxb50m3ggmww" path="res://PIXEL ART/player.tres" id="8_dw050"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dw050"]
@@ -42,7 +43,7 @@ _data = {
 
 [node name="Player" type="Node2D" unique_id=2078899362 groups=["player_units"]]
 script = ExtResource("1_onrkg")
-actions = Array[ExtResource("2_1jxqw")]([ExtResource("3_dw050"), ExtResource("4_dw050"), ExtResource("5_dw050")])
+actions = Array[ExtResource("2_1jxqw")]([ExtResource("3_dw050"), ExtResource("4_dw050"), ExtResource("5_dw050"), ExtResource("6_dw050")])
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1869163387]
 offset_left = -38.0

@@ -42,7 +42,8 @@ func _ready():
 	health_component.health_depleted.connect(_on_health_depleted)
 	health_bar.max_value = health_component.max_health
 	health_bar.value = health_component.health
-	actions.append(preload("res://actions/dev_gun.tres"))
+	#just uncomment the below line to get the dev gun, though do note its kinda buggy with so many attacks for the player
+	#actions.append(preload("res://actions/dev_gun.tres"))
 
 func _on_health_changed(delta: int):
 	health_bar.value += delta
@@ -83,7 +84,6 @@ func _on_request_action(action: TurnAction):
 	
 	is_moving = false
 	current_action = action
-	
 	current_hint = action.hint(self, level)
 
 	level.show_hint(current_hint, Vector2i(0, 0))

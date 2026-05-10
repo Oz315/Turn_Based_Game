@@ -35,6 +35,7 @@ func display_actions(actions: Array[TurnAction]):
 		var btn = Button.new()
 		btn.icon = action.icon
 		btn.text = action.name
+		
 		btn.pressed.connect(_on_attack_pressed.bind(btn, action))
 		$ActionContainer.add_child(btn)
 

@@ -3,18 +3,23 @@
 [ext_resource type="Script" uid="uid://ttgiyauxwaxi" path="res://hud.gd" id="1_37p78"]
 [ext_resource type="FontFile" uid="uid://d3vwv02h5wt2k" path="res://fonts/Cardinal.ttf" id="2_64ctp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ctp"]
+bg_color = Color(0.91147137, 0.68724465, 0.2351636, 1)
+corner_radius_bottom_right = 16
+
 [node name="HUD" type="CanvasLayer" unique_id=2066656993]
 script = ExtResource("1_37p78")
 
 [node name="Move" type="Button" parent="." unique_id=2071848066]
 anchors_preset = -1
-anchor_left = 0.42800003
+anchor_left = 0.425
 anchor_top = 1.0
-anchor_right = 0.42800003
+anchor_right = 0.425
 anchor_bottom = 1.0
-offset_left = -43.05603
-offset_top = -50.0
-offset_right = 36.94397
+offset_left = -39.600006
+offset_top = -54.0
+offset_right = 40.399994
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 0
 toggle_mode = true
@@ -34,21 +39,36 @@ text = "End Turn"
 
 [node name="ActionContainer" type="HBoxContainer" parent="." unique_id=955948513]
 anchors_preset = -1
-anchor_left = 0.67800003
+anchor_left = 0.671
 anchor_top = 1.0
-anchor_right = 0.67800003
+anchor_right = 0.671
 anchor_bottom = 1.0
-offset_left = -237.05603
-offset_top = -49.0
-offset_right = 237.94397
+offset_left = -238.992
+offset_top = -53.0
+offset_right = 238.008
 offset_bottom = -1.0
 
 [node name="TurnCounter" type="Label" parent="." unique_id=2080720630]
-offset_right = 123.0
+offset_right = 131.0
 offset_bottom = 47.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_64ctp")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_64ctp")
 text = "Turn 1/15"
+
+[node name="ConfirmAttack" type="Button" parent="." unique_id=1952099978]
+anchors_preset = -1
+anchor_left = 0.96500003
+anchor_top = 0.841
+anchor_right = 0.96500003
+anchor_bottom = 0.841
+offset_left = -39.680054
+offset_top = -26.968018
+offset_right = 40.319946
+offset_bottom = 27.031982
+text = "Confirm
+Attack"
 
 [node name="LoadingScreen" type="ColorRect" parent="." unique_id=1086873422]
 anchors_preset = 15
@@ -58,18 +78,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
-
-[node name="ConfirmAttack" type="Button" parent="." unique_id=1952099978]
-anchors_preset = -1
-anchor_left = 0.96500003
-anchor_top = 0.90400004
-anchor_right = 0.96500003
-anchor_bottom = 0.90400004
-offset_left = -39.680054
-offset_top = -45.792053
-offset_right = 40.319946
-offset_bottom = 0.20794678
-text = "Attack"
 
 [connection signal="pressed" from="Move" to="." method="_on_move_pressed"]
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]

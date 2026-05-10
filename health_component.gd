@@ -16,7 +16,7 @@ signal health_depleted
 @onready var health: int = max_health: set = set_health, get = get_health
 
 func set_health(v: int):
-	print("set health to ", v)
+	#print("set health to ", v)
 	var delta = v - health
 	health_changed.emit(delta)
 
@@ -36,7 +36,7 @@ func set_max_health(v: int):
 	max_health = v
 
 func get_health() -> int:
-	print("health is ", health)
+	#print("health is ", health)
 	return health
 
 

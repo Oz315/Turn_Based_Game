@@ -1,19 +1,17 @@
 extends Node2D
 
-#We can use an array of packed scenes to not have such specific paths but if we do that
-# it just has the problem of loading all the levels at once, which is what we were trying to avoid in the
-# first place
+# HERE IS WHERE YOU ADD YOUR LEVELS
+# Just click and drage them from the filesystem here, and make sure they're in the all_levels folder
 var level_list = [
 	"res://all_levels/level1.tscn",
 	"res://all_levels/level2.tscn",
 	#"res://all_levels/level3.tscn"
 ]
 
-#this is a temporary fix to a problem i was having
 var in_level_transition = false
 
 var current_level = 0
-# So the best thing we can do is have each level as its own scene, its not the most enjoyable but its most
+# So the best thing we can do is have each level as its own scene, its not the most pretty but its most
 # optimal and from what I've read the best practice in cases like ours
 # If you want to make a new level, please make it from the levels.tscn in the folder all_levels, its the 'base level structure'
 # Just right-click it and click new inherited scene
@@ -26,15 +24,14 @@ func _ready():
 	SignalBus.inc_turn.connect(turn_update)
 	SignalBus.reset_turns.connect($TurnQueue.reset_turns_count)
 	SignalBus.retry.connect(retry_level)
-#making this a function so we can call it to load the other levels
 
 func turn_update(current_turn: int):
-	print("updating turn counter")
+	#print("updating turn counter")
 	var level = $Levels.get_child(0)
 	if level:
 		$HUD.update_turns(current_turn, level.turn_limit)
 	else:
-		print("cant find labels")
+		print("cant find turn label")
 	if current_turn > level.turn_limit:
 		show_game_over("turns")
 
@@ -48,7 +45,7 @@ func load_level(level):
 	$HUD.update_turns(1, new_level.turn_limit)
 	SignalBus.reset_turns.emit()
 	$TurnQueue.player_turn()
-	print("loaded level ", level)
+	#print("loaded level ", level)
 	
 	in_level_transition = false
 
@@ -75,7 +72,7 @@ func show_game_over(how: String):
 	await $HUD.fade_in()
 	var game_over_scene = load("res://game_over_screen.tscn").instantiate()
 	game_over_scene.lose_message(how)
-	# If we don't add it to the canvas layer of HUD, it can get a bit buggy
+	# If we don't add it to the canvas layer of HUD, it can get a bit buggy with it overlapping with units and astar grid
 	$HUD.add_child(game_over_scene)
 
 func game_win():
@@ -83,9 +80,9 @@ func game_win():
 
 func advance_level():
 	in_level_transition = true
-	#if we want to have a victory screen gotta call it before the fade_in
+	await $HUD.level_win()
 	await $HUD.fade_in()
-	print("no more enemies remain")
+	#print("no more enemies remain")
 	current_level += 1
 	if current_level < level_list.size():
 		load_level(level_list[current_level])

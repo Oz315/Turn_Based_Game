@@ -61,7 +61,6 @@ func _on_health_depleted():
 func new_turn():
 	has_moved = false
 	has_attacked = false
-	print("new turn triggering, this should only be printing once")
 
 #This should be triggering each time you click the move button
 func _enable_move():
@@ -103,7 +102,6 @@ func _on_confirm_attack():
 
 
 func _input(event):
-	#This code was taken from the same Youtube Tutorial as the astar grid creation one, with some modifications of course
 	if is_moving == false and is_attacking == false or event.is_action_pressed("click") == false or is_in_attack_animation or has_attacked:
 		return
 

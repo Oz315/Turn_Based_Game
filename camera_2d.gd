@@ -1,9 +1,6 @@
 extends Camera2D
 
-#This is just for a moveable camera, it shouldn't have to interact with anything else 
-#unless we want it to lock on to enemies when they take their turn
-#we can also make it so that the camera has custom borders for each level so the player can't see
-#off the level but we'd have to have more finalized levels before we start doing that
+#This is just for a moveable camera, it shouldn't have to interact with anything else in the system
 var _target_zoom: float = 1.0
 const MIN_ZOOM: float = 0.8
 const MAX_ZOOM: float = 2.0

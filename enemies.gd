@@ -65,10 +65,6 @@ func _on_health_depleted():
 	queue_free()
 	pass
 
-#This was just for testing
-#func _ready():
-	#print(name, " has groups: ", get_groups(), " and enemy script ", name, " has method ", has_method("take_turn"))
-
 #How each enemy takes its turn, its movement logic is basically the same as the player except its target is the player
 func take_turn():
 	if level != null and not level.is_connected("occupancy_changed", _on_occupancy_changed):
@@ -90,7 +86,6 @@ func take_turn():
 	update_intent()
 	
 	var target = check_if_ranged(level.tile_map.local_to_map(player.global_position))
-	#level.occupancy.erase(level.tile_map.local_to_map(global_position))
 	var id_path = level.astar_grid.get_id_path(
 		level.tile_map.local_to_map(global_position),
 		target
@@ -134,8 +129,7 @@ func play_next_attack(player: Player):
 func check_if_ranged(player_tile: Vector2i) -> Vector2i:
 	var enemy_tile: Vector2i = Vector2i(level.tile_map.local_to_map(global_position))
 	var first_action = enemy_type.actions[0]
-	
-	# 1. Determine ranges safely
+
 	var min_range: int = 1
 	var max_range: int = 1
 	
@@ -203,17 +197,17 @@ func first_playable_attack(player: Player) -> void:
 
 #i tried creating a random sort of attack decider without updating intent but it didn't really work, ill
 # leave it here tho incase i have a eureka moment or something
-func decide_next_attack(player: Player) -> void:
-	for action in enemy_type.actions:
-		var positions = action.hint(self, level)
-		for pos in positions:
-			if level.occupancy.get(pos) is Player:
-				next_attack = action
-				next_attack_target = pos
-				return
-	next_attack = enemy_type.actions[randi() % enemy_type.actions.size()]
-	next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
-				
+#func decide_next_attack(player: Player) -> void:
+	#for action in enemy_type.actions:
+		#var positions = action.hint(self, level)
+		#for pos in positions:
+			#if level.occupancy.get(pos) is Player:
+				#next_attack = action
+				#next_attack_target = pos
+				#return
+	#next_attack = enemy_type.actions[randi() % enemy_type.actions.size()]
+	#next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
+				#
 #this function is what determines the tile where the enemy tries to go based off their attack
 func best_tile_to_move_to(player_tile: Vector2i) -> Vector2i:
 	var best_tile = player_tile

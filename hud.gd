@@ -6,10 +6,10 @@ signal end_turn
 @onready var turn_counter: Label = $TurnCounter
 
 func _ready():
+	$LevelWin.hide()
 	SignalBus.player_turn.connect(_on_player_turn)
 
 func update_turns(current_turn: int, limit: int):
-	print("label is updating to new turn " + str(current_turn))
 	turn_counter.text = "Turn " + str(current_turn) + "/" + str(limit)
 
 func fade_in(duration: float = 1.0, extra_wait_time: float = 0.5) -> void:
@@ -57,6 +57,12 @@ func lock_ui(locked):
 		if button is Button:
 			button.disabled = locked
 			button.modulate.a = 1 if !locked else 0.5
+
+# Here we can play some jingle or something if we find a good audio file for it
+func level_win():
+	$LevelWin.show()
+	await get_tree().create_timer(3.0).timeout
+	$LevelWin.hide()
 
 func _on_move_pressed():
 	get_tree().call_group("player_units", "_enable_move")

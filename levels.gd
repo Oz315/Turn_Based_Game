@@ -69,11 +69,11 @@ func update_occupancy():
 			unit.tree_exited.connect(update_occupancy)
 	occupancy_changed.emit()
 
-#This is in levels so we only have to generate it every new level, from my understanding most of these commands are
-#just standard protocol when making an AStarGrid2D, I got this from a Youtube Tutorial btw
+# This is in levels so we only have to generate it every new level, from my understanding most of these commands are
+# just standard protocol when making an AStarGrid2D
 # Diagonal movement is now possible, within the WalkableTiles there is now a black tile
 # which should just be treated as a tile you can walk pass but never land on, put it for corners where you
-# want the player to step up
+# want the player to step up or water someone can cross if they have enough movement points
 func make_grid():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
@@ -89,15 +89,13 @@ func make_grid():
 			)
 
 			var tile_data = tile_map.get_cell_tile_data(tile_position)
-			#This ground_data is so that it checks if there is "ground" beneath the player so that they
-			#don't just fly into the sky
 
-			#its a long if statement but just checking for the custom data
+			# since we aren't really used custom data at this point, we just worry about the walkable overlay
 			if tile_data == null:
 				astar_grid.set_point_solid(tile_position)
 
-#this function is what paints over the black outline for where the player can move
-#I'm thinking this can be made to work with the attack_range too
+# this function is what paints over the black outline for where the player can move
+# I'm thinking this can be made to work with the attack_range too
 func _move_range(player_pos, range):
 	move_layer.clear()
 	var player_tile = tile_map.local_to_map(player_pos)
@@ -140,8 +138,6 @@ func axis_aligned_raycast(origin: Vector2i, target: Vector2i, max_range: int = 3
 func cell_on_ground(pos: Vector2i) -> bool:
 	if ground_layer == null:
 		return false
-	# "on ground" if there is a foreground cell beneath it but no cell at the position
-
 	# allow fire to be placed on fire
 	var occupied = ground_layer.get_cell_source_id(pos) != -1 and ground_layer.get_cell_source_id(pos) != 13
 

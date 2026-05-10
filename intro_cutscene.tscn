@@ -1,9 +1,34 @@
 [gd_scene format=3 uid="uid://c66g6mcgu5h07"]
 
+[ext_resource type="Script" uid="uid://o28v3llkn7de" path="res://intro_cutscene.gd" id="1_pcp2w"]
 [ext_resource type="Texture2D" uid="uid://dqypsmtsp78xj" path="res://tiles/Black Block.png" id="1_rlq26"]
+[ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="2_lvalt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvalt"]
 texture = ExtResource("1_rlq26")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcp2w"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b82mh"]
+bg_color = Color(0.66245234, 0.66245234, 0.6624523, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_660lu"]
+bg_color = Color(0.728822, 0.728822, 0.728822, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_suuxw"]
 
 [node name="Control" type="Control" unique_id=1694005228]
 layout_mode = 3
@@ -12,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pcp2w")
 
 [node name="Panel" type="Panel" parent="." unique_id=1584185231]
 layout_mode = 1
@@ -22,19 +48,61 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_lvalt")
 
-[node name="Label" type="Label" parent="." unique_id=519973873]
+[node name="Continue" type="Button" parent="Panel" unique_id=1839662662]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -65.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lvalt")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_pcp2w")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_pcp2w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b82mh")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_pcp2w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_660lu")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_pcp2w")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pcp2w")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_pcp2w")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_suuxw")
+text = "Skip
+"
+
+[node name="Story" type="Label" parent="." unique_id=519973873]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -331.0
-offset_top = -184.0
-offset_right = 331.0
-offset_bottom = 184.0
+offset_left = -502.0
+offset_top = -273.0
+offset_right = 493.0
+offset_bottom = 223.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "I'll eventually work  this intro cutscene to basically be called when the player presses play
-then it should just come to this scene where we timeout, display the story text, and
-then move to the main scene which continues the game as normal"
+text = "																Aetherfall: Rise of Deathwing or Aetherfall: The Crystal Flame
+In the kingdom of Aetherfall, the people once lived under the protection of the great purple dragon Deathwing. He was the guardian of the Crystal Flame. The Flame was a powerful source of energy that protected the kingdom from the darkness and kept balance across the land. Over time, the Crystal Flame began to weaken. Consumed by corruption and rage, Deathwing disappeared into the Inferno Fortress deep beneath the kingdom. Soon after, strange creatures and corrupted animal soldiers began attacking cities, destroying villages, and spreading fear throughout the land. As the kingdom fell into chaos, two unlikely heroes, Byte and Micael, survived the first invasion and witnessed Deathwing’s return. Realizing nobody else could stop the destruction, they set out on a journey across dangerous lands, abandoned towers, and volcanic ruins to restore the Crystal Flame and save the kingdom before it is consumed entirely.
+Along the way, they must battle Deathwing’s commanders, including:
+		King Shark
+		Gorilla Brute
+		Monkey Assassin
+		Snake Spearman
+Each commander guards a different part of the kingdom, preventing the heroes from reaching Deathwing and restoring the Crystal Flame.
+The fate of Aetherfall now rests in their hands."
+autowrap_mode = 3
+visible_characters = 1159
+visible_ratio = 0.882
+
+[connection signal="pressed" from="Panel/Continue" to="." method="_on_continue_pressed"]

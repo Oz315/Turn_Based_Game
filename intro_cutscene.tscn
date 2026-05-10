@@ -92,17 +92,19 @@ offset_right = 493.0
 offset_bottom = 223.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "																Aetherfall: Rise of Deathwing or Aetherfall: The Crystal Flame
-In the kingdom of Aetherfall, the people once lived under the protection of the great purple dragon Deathwing. He was the guardian of the Crystal Flame. The Flame was a powerful source of energy that protected the kingdom from the darkness and kept balance across the land. Over time, the Crystal Flame began to weaken. Consumed by corruption and rage, Deathwing disappeared into the Inferno Fortress deep beneath the kingdom. Soon after, strange creatures and corrupted animal soldiers began attacking cities, destroying villages, and spreading fear throughout the land. As the kingdom fell into chaos, two unlikely heroes, Byte and Micael, survived the first invasion and witnessed Deathwing’s return. Realizing nobody else could stop the destruction, they set out on a journey across dangerous lands, abandoned towers, and volcanic ruins to restore the Crystal Flame and save the kingdom before it is consumed entirely.
+theme_override_fonts/font = ExtResource("2_lvalt")
+theme_override_font_sizes/font_size = 28
+text = "In the kingdom of Aetherfall, the people once lived under the protection of the great purple dragon Deathwing. He was the guardian of the Crystal Flame. The Flame was a powerful source of energy that protected the kingdom from the darkness and kept balance across the land. Over time, the Crystal Flame began to weaken. Consumed by corruption and rage, Deathwing disappeared into the Inferno Fortress deep beneath the kingdom. Soon after, strange creatures and corrupted animal soldiers began attacking cities, destroying villages, and spreading fear throughout the land. As the kingdom fell into chaos, two unlikely heroes, Byte and Hex, survived the first invasion and witnessed Deathwing’s return. Realizing nobody else could stop the destruction, they set out on a journey across dangerous lands, abandoned towers, and volcanic ruins to restore the Crystal Flame and save the kingdom before it is consumed entirely. Along the way, they must battle Deathwing’s commanders, including the ruthless King Shark and other corrupted beasts serving under the dragon’s control.
 Along the way, they must battle Deathwing’s commanders, including:
-		King Shark
-		Gorilla Brute
-		Monkey Assassin
-		Snake Spearman
-Each commander guards a different part of the kingdom, preventing the heroes from reaching Deathwing and restoring the Crystal Flame.
-The fate of Aetherfall now rests in their hands."
+King Shark
+Gorilla Brute
+Monkey Assassin
+Snake Spearman
+Shadowfang
+Each commander guards a different part of the kingdom, preventing the heroes from reaching Deathwing and restoring the Crystal Flame. The fate of Aetherfall now rests in their hands.
+"
 autowrap_mode = 3
-visible_characters = 1159
+visible_characters = 1225
 visible_ratio = 0.882
 
 [connection signal="pressed" from="Panel/Continue" to="." method="_on_continue_pressed"]

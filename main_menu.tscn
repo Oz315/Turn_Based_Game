@@ -123,12 +123,8 @@ offset_right = 496.0
 offset_bottom = 95.895996
 grow_horizontal = 2
 theme_override_fonts/font = SubResource("FontVariation_nlkkf")
-theme_override_font_sizes/font_size = 30
-text = "this should be game title just increase font size to like 40 or something also, the background
-node on the left is for the black background, you can either make it a solid
-color but if we want a level image, just make some level, take a screenshot of
-it and drag the png to the panel and it should work
-"
+theme_override_font_sizes/font_size = 70
+text = "Aetherfall: Rise of Deathwing"
 horizontal_alignment = 1
 vertical_alignment = 1
 

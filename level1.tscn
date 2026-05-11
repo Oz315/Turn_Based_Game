@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://d3iitgj2y1x7i" path="res://enemy_types/frog_enemy.tres" id="4_g8gig"]
 [ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="4_t3xjx"]
 [ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="6_mm5ak"]
-[ext_resource type="AudioStream" uid="uid://cp7cu10mhg862" path="res://Gamemusic/Mainmenumus.ogg" id="8_dmsvk"]
+[ext_resource type="AudioStream" uid="uid://cp7cu10mhg862" path="res://GameMusic/Mainmenumus.ogg" id="8_dmsvk"]
 
 [node name="Levels" unique_id=1950013390 instance=ExtResource("1_u78km")]
 
@@ -34,7 +34,8 @@ position = Vector2(176, -80)
 position = Vector2(-336, -176)
 enemy_type = ExtResource("4_g8gig")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2" unique_id=346942649]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2" unique_id=478799125]
 stream = ExtResource("8_dmsvk")
+volume_db = -34.667
 autoplay = true
 parameters/looping = true

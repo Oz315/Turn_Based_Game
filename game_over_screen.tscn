@@ -2,6 +2,7 @@
 
 [ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="1_gt22q"]
 [ext_resource type="Script" uid="uid://cftss4s2d1bhs" path="res://game_over_screen.gd" id="1_w3hxg"]
+[ext_resource type="AudioStream" uid="uid://cp4pioy2h4ecu" path="res://GameMusic/Lose.ogg" id="3_l4tlu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3hxg"]
 bg_color = Color(0, 0, 0, 1)
@@ -138,6 +139,9 @@ theme_override_font_sizes/font_size = 50
 text = "You failed!"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="Lose" type="AudioStreamPlayer" parent="." unique_id=174427312]
+stream = ExtResource("3_l4tlu")
 
 [connection signal="pressed" from="HBoxContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_quit_pressed"]

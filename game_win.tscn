@@ -2,6 +2,7 @@
 
 [ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="1_1f66h"]
 [ext_resource type="Script" uid="uid://bxb0cdesjk1fo" path="res://game_win.gd" id="1_fctd2"]
+[ext_resource type="AudioStream" uid="uid://cv72if03mldm3" path="res://GameMusic/Win.ogg" id="3_nyypv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryse7"]
 bg_color = Color(0, 0, 0, 1)
@@ -108,5 +109,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "If we want to have a final message like the intro, please just input text here
 and mess with the tween duration in the script"
+
+[node name="Win" type="AudioStreamPlayer" parent="." unique_id=870825070]
+stream = ExtResource("3_nyypv")
 
 [connection signal="pressed" from="Panel/Return" to="." method="_on_return_pressed"]

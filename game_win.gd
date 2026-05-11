@@ -1,6 +1,9 @@
 extends Control
+@onready var win_sound = $Win
 
 func _ready():
+	win_sound.play()
+
 	$Panel/Return.hide()
 	$FinalMessage.visible_ratio = 0
 	await get_tree().create_timer(2.5).timeout

@@ -1,9 +1,11 @@
-[gd_scene format=3 uid="uid://de7874jgdp7e0"]
+[gd_scene format=4 uid="uid://de7874jgdp7e0"]
 
 [ext_resource type="FontFile" uid="uid://ddd2cvyo1luj5" path="res://fonts/TaylorGothic.otf" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://ddsq6nxe0u2jp" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://dqypsmtsp78xj" path="res://tiles/Black Block.png" id="2_jix8l"]
 [ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="3_jix8l"]
+[ext_resource type="AudioStream" uid="uid://cp7cu10mhg862" path="res://GameMusic/Mainmenumus.ogg" id="5_glbon"]
+[ext_resource type="TileSet" uid="uid://bgo6j4kolhtv7" path="res://BUILDING_BLOCKS.tres" id="6_nlkkf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("2_jix8l")
@@ -122,11 +124,24 @@ offset_top = -32.104004
 offset_right = 496.0
 offset_bottom = 95.895996
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_nlkkf")
 theme_override_font_sizes/font_size = 70
 text = "Aetherfall: Rise of Deathwing"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1719081335]
+stream = ExtResource("5_glbon")
+autoplay = true
+parameters/looping = true
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=78351272]
+tile_set = ExtResource("6_nlkkf")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1633297137]
+tile_map_data = PackedByteArray("AAAAABMABgAAAAAAAAABABMABgAAAAAAAAACABMABgAAAAAAAAADABMABgAAAAAAAAAEABMABgAAAAAAAAAFABMABgAAAAAAAAAAABQABgAAAAAAAAABABQABgAAAAAAAAACABQABgAAAAAAAAADABQABgAAAAAAAAAEABQABgAAAAAAAAAFABQABgAAAAAAAAAGABMABgAAAAAAAAAHABMABgAAAAAAAAAIABMABgAAAAAAAAAJABMABgAAAAAAAAAGABQABgAAAAAAAAAHABQABgAAAAAAAAAIABQABgAAAAAAAAAJABQABgAAAAAAAAAKABQABgAAAAAAAAALABQABgAAAAAAAAAMABQABgAAAAAAAAAMABMABgAAAAAAAAALABMABgAAAAAAAAAKABMABgAAAAAAAAANABMABgAAAAAAAAAOABQABgAAAAAAAAANABQABgAAAAAAAAAOABMABgAAAAAAAAAjABMABgAAAAAAAAAiABMABgAAAAAAAAAhABMABgAAAAAAAAAgABMABgAAAAAAAAAfABMABgAAAAAAAAAfABQABgAAAAAAAAAgABQABgAAAAAAAAAhABQABgAAAAAAAAAiABQABgAAAAAAAAAjABQABgAAAAAAAAAbABMAFQAAAAAAAAAcABMAFQAAAAAAAAAdABMAFQAAAAAAAAAeABMAFQAAAAAAAAAeABQAFQAAAAAAAAAdABQAFQAAAAAAAAAcABQAFQAAAAAAAAAbABQAFQAAAAAAAAAbABIAFQAAAAAAAAAcABIAFQAAAAAAAAAdABIAFQAAAAAAAAAeABIAFQAAAAAAAAAfABIADQAAAAAAAAAgABIADQAAAAAAAAAhABIADQAAAAAAAAAiABIADQAAAAAAAAAjABIADQAAAAAAAAAAABAABgAAAAAAAAAAABEABgAAAAAAAAAAABIABgAAAAAAAAABABIABgAAAAAAAAACABIABgAAAAAAAAACABEABgAAAAAAAAABABEABgAAAAAAAAABABAABgAAAAAAAAACABAABgAAAAAAAAABAA8ADgAAAAAAAAAAAA8ADgAAAAAAAAACAA8ADgAAAAAAAAA=")
+tile_set = ExtResource("6_nlkkf")
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

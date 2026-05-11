@@ -191,3 +191,16 @@ func show_damage_hints():
 	attack_hint_layer.clear()
 	for hint in damage_hints:
 		attack_hint_layer.set_cell(hint.target, 0, Vector2i(2, 0))
+
+# This will return the borders of the level but based off the background, so the air tiles and stuff basically
+# so when making a level make sure the background is a box using the box tool
+func get_level_borders() -> Rect2:
+	var layer = get_node("MapTiles/Background")
+	var borders = layer.get_used_rect()
+	var cell_size = layer.tile_set.tile_size
+	return Rect2(
+		borders.position.x * cell_size.x,
+		borders.position.y * cell_size.y,
+		borders.size.x * cell_size.x,
+		borders.size.y * cell_size.y
+	)

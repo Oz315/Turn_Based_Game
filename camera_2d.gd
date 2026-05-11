@@ -1,6 +1,5 @@
 extends Camera2D
 
-#This is just for a moveable camera, it shouldn't have to interact with anything else in the system
 var _target_zoom: float = 1.0
 const MIN_ZOOM: float = 0.8
 const MAX_ZOOM: float = 2.0
@@ -28,3 +27,13 @@ func _unhandled_input(event):
 				zoom_in()
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom_out()
+
+func update_borders(borders):
+	# these are the actual limits in the inspector
+	limit_left = borders.position.x
+	limit_top = borders.position.y
+	limit_right = borders.end.x
+	limit_bottom = borders.end.y
+	
+	# just moves the camera inbounds if its outside during a change in level
+	force_update_scroll()

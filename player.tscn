@@ -8,9 +8,9 @@
 [ext_resource type="Resource" uid="uid://dx0bjyb2wc88e" path="res://actions/basic_bow.tres" id="5_dw050"]
 [ext_resource type="Resource" uid="uid://bn5h3kqu77hvj" path="res://actions/big_attack.tres" id="6_dw050"]
 [ext_resource type="SpriteFrames" uid="uid://cyxb50m3ggmww" path="res://PIXEL ART/player.tres" id="8_dw050"]
-[ext_resource type="AudioStream" uid="uid://ca3wndhpefic7" path="res://Gamemusic/walking.ogg" id="9_b26j0"]
-[ext_resource type="AudioStream" uid="uid://dqem5icgo6rrh" path="res://Gamemusic/bow.ogg" id="10_n7ghd"]
-[ext_resource type="AudioStream" uid="uid://c2ycmeh7174x" path="res://Gamemusic/BasicAttack.ogg" id="11_nvl01"]
+[ext_resource type="AudioStream" uid="uid://ca3wndhpefic7" path="res://GameMusic/walking.ogg" id="9_b26j0"]
+[ext_resource type="AudioStream" uid="uid://dqem5icgo6rrh" path="res://GameMusic/bow.ogg" id="10_n7ghd"]
+[ext_resource type="AudioStream" uid="uid://c2ycmeh7174x" path="res://GameMusic/BasicAttack.ogg" id="11_nvl01"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dw050"]
 

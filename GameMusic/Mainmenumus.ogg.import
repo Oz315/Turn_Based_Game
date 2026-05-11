@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://cp7cu10mhg862"
-path="res://.godot/imported/Mainmenumus.ogg-179e1a3a102ba6ca6a14bbacce363ee6.oggvorbisstr"
+path="res://.godot/imported/Mainmenumus.ogg-5eb98894cbc8b0bb23abe92767c6ddf5.oggvorbisstr"
 
 [deps]
 
-source_file="res://Gamemusic/Mainmenumus.ogg"
-dest_files=["res://.godot/imported/Mainmenumus.ogg-179e1a3a102ba6ca6a14bbacce363ee6.oggvorbisstr"]
+source_file="res://GameMusic/Mainmenumus.ogg"
+dest_files=["res://.godot/imported/Mainmenumus.ogg-5eb98894cbc8b0bb23abe92767c6ddf5.oggvorbisstr"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://t1nhg2i58nuw"
-path="res://.godot/imported/enemies.ogg-9dc83066fd53764347879f3d946264fb.oggvorbisstr"
+path="res://.godot/imported/enemies.ogg-4d1ebe06d7170e8675f78ec0777babe7.oggvorbisstr"
 
 [deps]
 
-source_file="res://Gamemusic/enemies.ogg"
-dest_files=["res://.godot/imported/enemies.ogg-9dc83066fd53764347879f3d946264fb.oggvorbisstr"]
+source_file="res://GameMusic/enemies.ogg"
+dest_files=["res://.godot/imported/enemies.ogg-4d1ebe06d7170e8675f78ec0777babe7.oggvorbisstr"]
 
 [params]
 

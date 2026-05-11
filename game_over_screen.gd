@@ -6,7 +6,7 @@ func lose_message(how: String):
 	if how == "health":
 		$FailureMessage.text += "\nYou lost all your health"
 	elif how == "turns":
-		$FailureMessage.text += "\nYou ran out of turns and couldn't reach Darkwing in time"
+		$FailureMessage.text += "\nYou ran out of turns"
 
 
 func _on_quit_pressed():

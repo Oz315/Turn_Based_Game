@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://ca3wndhpefic7"
-path="res://.godot/imported/walking.ogg-8fb2894afd797e55ee7c0b69b7b5e2cd.oggvorbisstr"
+path="res://.godot/imported/walking.ogg-4d462272970c8201f72d8e8a5fab0ef1.oggvorbisstr"
 
 [deps]
 
-source_file="res://Gamemusic/walking.ogg"
-dest_files=["res://.godot/imported/walking.ogg-8fb2894afd797e55ee7c0b69b7b5e2cd.oggvorbisstr"]
+source_file="res://GameMusic/walking.ogg"
+dest_files=["res://.godot/imported/walking.ogg-4d462272970c8201f72d8e8a5fab0ef1.oggvorbisstr"]
 
 [params]
 

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_3qfcm")
-range = 1
+range = 2
 damage = 2
 icon = ExtResource("1_j4yb3")
 name = "Basic Attack"

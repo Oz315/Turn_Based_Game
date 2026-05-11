@@ -5,7 +5,9 @@ extends Node2D
 var level_list = [
 	"res://all_levels/level1.tscn",
 	"res://all_levels/level2.tscn",
-	#"res://all_levels/level3.tscn"
+	"res://all_levels/level3.tscn",
+	"res://all_levels/level4.tscn",
+	"res://all_levels/level5.tscn"
 ]
 
 var in_level_transition = false
@@ -41,6 +43,7 @@ func load_level(level):
 	var new_level = load(level).instantiate()
 	$Levels.add_child(new_level)
 	new_level.initialize()
+	$Camera2D.update_borders(new_level.get_level_borders())
 	await $HUD.fade_out()
 	$HUD.update_turns(1, new_level.turn_limit)
 	SignalBus.reset_turns.emit()

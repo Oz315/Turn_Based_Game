@@ -8,5 +8,6 @@
 [resource]
 script = ExtResource("2_ni80u")
 sprites = ExtResource("3_iuwj0")
+max_health = 6
 actions = Array[ExtResource("1_iuwj0")]([ExtResource("1_ni80u")])
 metadata/_custom_type_script = "uid://d0tgudynvd5o7"

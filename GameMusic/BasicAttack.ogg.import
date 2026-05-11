@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://c2ycmeh7174x"
-path="res://.godot/imported/BasicAttack.ogg-dcebbc9de5c38aaf0c9c2d4bcf64f868.oggvorbisstr"
+path="res://.godot/imported/BasicAttack.ogg-8416fae7f96d6ec88aa5d92bbabfa701.oggvorbisstr"
 
 [deps]
 
-source_file="res://Gamemusic/BasicAttack.ogg"
-dest_files=["res://.godot/imported/BasicAttack.ogg-dcebbc9de5c38aaf0c9c2d4bcf64f868.oggvorbisstr"]
+source_file="res://GameMusic/BasicAttack.ogg"
+dest_files=["res://.godot/imported/BasicAttack.ogg-8416fae7f96d6ec88aa5d92bbabfa701.oggvorbisstr"]
 
 [params]
 

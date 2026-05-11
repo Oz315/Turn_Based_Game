@@ -115,7 +115,7 @@ func take_turn():
 
 	# If the player isn't dead yet, play choose another attack and update intents
 	if is_instance_valid(player):
-		first_playable_attack(player)
+		basic_attack_selection(player)
 
 func play_next_attack(player: Player):
 	# just do what the hint last turn said we would do
@@ -128,6 +128,18 @@ func play_next_attack(player: Player):
 	#for position in positions:
 		#if level.occupancy.get(position) is Player:
 			#await next_attack.execute(self, positions.pick_random(), level)
+
+## returns min, max range. This should have been thought about from the start, sorry about that
+func get_safe_range(action: TurnAction) -> Vector2i:
+	if action is RangedAction:
+		return Vector2i(action.min_range, action.max_range)
+	elif action is MeleeAction:
+		return Vector2i(1, action.range)
+	elif action is AoeAction:
+		return Vector2i(action.aoe_range + 1, action.throw_range)
+	else:
+		print("Unknown action type. Please add it to get_safe_range() in enemies.gd")
+		return Vector2i(1, 1)
 
 # this is a bit of brute force logic as enemies pathing will basically be decided
 # by their first attack in the actions array but I just don't know what else to do
@@ -152,6 +164,15 @@ func check_if_ranged(player_tile: Vector2i) -> Vector2i:
 		# has been programed here so you'd need another elif "new_attack_range"
 		print("Enemy has no standard attack, please check enemies.gd and its check_if_ranged func")
 		return enemy_tile
+	
+	min_range = 99
+	max_range = 1
+	
+	for action in enemy_type.actions:
+		var safe_range = get_safe_range(action)
+		min_range = min(min_range, safe_range[0])
+		max_range = max(max_range, safe_range[1])
+	
 	var diff = enemy_tile - player_tile
 	var current_dist = abs(diff.x) + abs(diff.y)
 	
@@ -190,13 +211,65 @@ func check_if_ranged(player_tile: Vector2i) -> Vector2i:
 
 
 ## Just play the first attack on any target you can
+func basic_attack_selection(player: Player) -> void:
+	
+	var long_range_attack = null
+	var short_range_attack = null
+	var best_damage = 0
+	var best_damage_attack = null
+	var best_damage_target = null
+	for action in enemy_type.actions:
+		var positions = action.hint(self, level)
+		var range = get_safe_range(action)
+		if range[0] > 1:
+			long_range_attack = action
+		elif range[1] < 3:
+			short_range_attack = action
+		for pos in positions:
+			var damage_hints = action.damage_hint(self, pos, level)
+			for damage_hint in damage_hints:
+				if level.occupancy.get(damage_hint.target) is not Player:
+					continue
+				if damage_hint.dmg > best_damage:
+					best_damage = damage_hint.dmg
+					best_damage_attack = action
+					best_damage_target = pos
+					
+			#if level.occupancy.get(pos) is Player:
+				#next_attack = action;
+				#next_attack_target = pos
+	if best_damage_attack != null:
+		next_attack = best_damage_attack
+	elif long_range_attack != null and short_range_attack != null:
+		var player_pos = level.tile_pos(player)
+		var enemy_pos = level.tile_pos(self)
+		var dif = abs(enemy_pos - player_pos)
+		var dst = max(dif.x ,dif.y)
+		var range = get_safe_range(long_range_attack)
+		
+		if dst < range[0] and best_damage_attack != long_range_attack:
+			next_attack = short_range_attack
+		else:
+			next_attack = long_range_attack
+	elif long_range_attack != null:
+		next_attack = long_range_attack
+	elif short_range_attack != null:
+		next_attack = short_range_attack
+	else:
+		next_attack = enemy_type.actions[0]
+				
+	next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
+	update_intent()
+
 func first_playable_attack(player: Player) -> void:
+	# If one of our attacks can hit the player, play it
 	for action in enemy_type.actions:
 		var positions = action.hint(self, level)
 		for pos in positions:
 			if level.occupancy.get(pos) is Player:
 				next_attack = action;
 				next_attack_target = pos
+	
 	next_attack = enemy_type.actions[0]
 	next_attack_target = next_attack.random_target(self, level.tile_pos(player), level)
 	update_intent()

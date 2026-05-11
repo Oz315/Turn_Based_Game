@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("3_ca86c")
-damage = 5
+damage = 4
 falloff = 2
 self_damage = false
 throw_range = 8

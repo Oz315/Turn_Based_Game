@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkgcr6n2ualyx"
-path="res://.godot/imported/tile_hints.png-cf42d6f77c7780c01f3e189468f03bca.ctex"
+uid="uid://blv3l6g6d2cet"
+path="res://.godot/imported/dragon_claw.png-a9d05dc5e83790efc5752fa8f84ae40c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/tile_hints.png"
-dest_files=["res://.godot/imported/tile_hints.png-cf42d6f77c7780c01f3e189468f03bca.ctex"]
+source_file="res://actions/icons/dragon_claw.png"
+dest_files=["res://.godot/imported/dragon_claw.png-a9d05dc5e83790efc5752fa8f84ae40c.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

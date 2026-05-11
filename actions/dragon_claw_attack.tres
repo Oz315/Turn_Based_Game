@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MeleeAction" format=3 uid="uid://uuq7frkkq7mw"]
+
+[ext_resource type="Texture2D" uid="uid://blv3l6g6d2cet" path="res://actions/icons/dragon_claw.png" id="1_5tcmi"]
+[ext_resource type="Script" uid="uid://41iyg81l0i8" path="res://actions/action_types/melee_action.gd" id="2_s45e8"]
+
+[resource]
+script = ExtResource("2_s45e8")
+range = 1
+damage = 5
+icon = ExtResource("1_5tcmi")
+name = "Claw Attack"
+tooltip = "A powerful close-range melee attack"
+metadata/_custom_type_script = "uid://41iyg81l0i8"

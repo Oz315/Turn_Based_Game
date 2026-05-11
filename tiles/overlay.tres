@@ -1,5 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://ndp2wka132ci"]
 
+[ext_resource type="Material" uid="uid://bu4u0htb3asml" path="res://overlay_invert_shader.tres" id="1_bf2oo"]
 [ext_resource type="Texture2D" uid="uid://dkgcr6n2ualyx" path="res://tiles/tile_hints.png" id="2_bf2oo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ld0ft"]
@@ -8,6 +9,7 @@ texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 2:0/0 = 0
 0:0/0 = 0
+0:0/0/material = ExtResource("1_bf2oo")
 
 [resource]
 tile_size = Vector2i(32, 32)

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="2_3hv7m"]
 [ext_resource type="Resource" uid="uid://devht6g6fpous" path="res://actions/dragon_fireball_attack.tres" id="2_q6gqc"]
 [ext_resource type="SpriteFrames" uid="uid://beeenxatwbtag" path="res://PIXEL ART/dragon.tres" id="3_3hv7m"]
+[ext_resource type="Resource" uid="uid://uuq7frkkq7mw" path="res://actions/dragon_claw_attack.tres" id="3_i4h8j"]
 [ext_resource type="AudioStream" uid="uid://c0oi24ni5dlfp" path="res://GameMusic/Fireball.ogg" id="3_iglym"]
 
 [resource]
@@ -12,5 +13,5 @@ sprites = ExtResource("3_3hv7m")
 max_health = 20
 move_range = 3
 attack_sound = ExtResource("3_iglym")
-actions = Array[ExtResource("1_q6gqc")]([ExtResource("2_q6gqc")])
+actions = Array[ExtResource("1_q6gqc")]([ExtResource("2_q6gqc"), ExtResource("3_i4h8j")])
 metadata/_custom_type_script = "uid://d0tgudynvd5o7"

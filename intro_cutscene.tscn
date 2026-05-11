@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://o28v3llkn7de" path="res://intro_cutscene.gd" id="1_pcp2w"]
 [ext_resource type="Texture2D" uid="uid://dqypsmtsp78xj" path="res://tiles/Black Block.png" id="1_rlq26"]
 [ext_resource type="FontVariation" uid="uid://bjhi302vm17jx" path="res://menu_fonts.tres" id="2_lvalt"]
+[ext_resource type="Texture2D" uid="uid://b8nh5a7v2xctm" path="res://tiles/Sky Block Clear.png" id="3_660lu"]
+[ext_resource type="Texture2D" uid="uid://cgsai1eaxjxi6" path="res://tiles/Sky Clouds 2.png" id="4_87rbk"]
+[ext_resource type="AudioStream" uid="uid://bfu8wxm8k7hnh" path="res://GameMusic/introScene.ogg" id="4_b82mh"]
+[ext_resource type="Texture2D" uid="uid://bpaly7bwmswos" path="res://tiles/Sky Clouds 1.png" id="5_usyqk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lvalt"]
 texture = ExtResource("1_rlq26")
@@ -48,6 +52,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_lvalt")
 
+[node name="SkyBlockClear" type="Sprite2D" parent="Panel" unique_id=657638266]
+position = Vector2(579.75006, 326.50003)
+scale = Vector2(35.828125, 20.406252)
+texture = ExtResource("3_660lu")
+
+[node name="SkyClouds3" type="Sprite2D" parent="Panel" unique_id=235032485]
+position = Vector2(785, 191)
+scale = Vector2(4.625, 2)
+texture = ExtResource("4_87rbk")
+
+[node name="SkyClouds1" type="Sprite2D" parent="Panel" unique_id=413670802]
+position = Vector2(1014.5, 336)
+scale = Vector2(5.21875, 4.8125)
+texture = ExtResource("5_usyqk")
+
+[node name="SkyClouds2" type="Sprite2D" parent="Panel" unique_id=2029912433]
+position = Vector2(177, 91.74999)
+scale = Vector2(7.999998, 4.7031245)
+texture = ExtResource("4_87rbk")
+
+[node name="SkyClouds2" type="Sprite2D" parent="Panel/SkyClouds2" unique_id=758710694]
+position = Vector2(42.62501, 66.60466)
+scale = Vector2(0.81868124, 1.2957746)
+texture = ExtResource("4_87rbk")
+
 [node name="Continue" type="Button" parent="Panel" unique_id=1839662662]
 layout_mode = 1
 anchors_preset = 3
@@ -86,12 +115,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -502.0
-offset_top = -273.0
-offset_right = 493.0
-offset_bottom = 223.0
+offset_left = -551.0
+offset_top = -311.0
+offset_right = 571.0
+offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_lvalt")
 theme_override_font_sizes/font_size = 28
 text = "In the kingdom of Aetherfall, the people once lived under the protection of the great purple dragon Deathwing. He was the guardian of the Crystal Flame. The Flame was a powerful source of energy that protected the kingdom from the darkness and kept balance across the land. Over time, the Crystal Flame began to weaken. Consumed by corruption and rage, Deathwing disappeared into the Inferno Fortress deep beneath the kingdom. Soon after, strange creatures and corrupted animal soldiers began attacking cities, destroying villages, and spreading fear throughout the land. As the kingdom fell into chaos, two unlikely heroes, Byte and Hex, survived the first invasion and witnessed Deathwing’s return. Realizing nobody else could stop the destruction, they set out on a journey across dangerous lands, abandoned towers, and volcanic ruins to restore the Crystal Flame and save the kingdom before it is consumed entirely. Along the way, they must battle Deathwing’s commanders, including the ruthless King Shark and other corrupted beasts serving under the dragon’s control.
@@ -106,5 +136,10 @@ Each commander guards a different part of the kingdom, preventing the heroes fro
 autowrap_mode = 3
 visible_characters = 1225
 visible_ratio = 0.882
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1892418052]
+stream = ExtResource("4_b82mh")
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Panel/Continue" to="." method="_on_continue_pressed"]

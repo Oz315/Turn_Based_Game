@@ -14,7 +14,7 @@ var intent = false
 
 #music effects
 @onready var enemy_footsteps = $FootSteps
-
+@onready var enemy_attack = $Attack
 
 
 signal done_moving
@@ -119,6 +119,11 @@ func take_turn():
 func play_next_attack(player: Player):
 	# just do what the hint last turn said we would do
 	if next_attack.validate(self, next_attack_target, level):
+		await next_attack.execute(self, next_attack_target, level)
+		
+		if !enemy_attack.playing:
+			enemy_attack.play()
+
 		await next_attack.execute(self, next_attack_target, level)
 
 	#var positions = next_attack.hint(self, level)

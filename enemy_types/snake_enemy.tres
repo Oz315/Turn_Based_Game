@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="1_250c8"]
 [ext_resource type="Resource" uid="uid://cqdek7iqy56ps" path="res://actions/polearm_attack.tres" id="2_dj0kp"]
+[ext_resource type="AudioStream" uid="uid://d2kojgbge7c46" path="res://GameMusic/Polearm.ogg" id="3_3722n"]
 [ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="3_ioxfe"]
 [ext_resource type="SpriteFrames" uid="uid://ckovbc5yokidr" path="res://PIXEL ART/snake.tres" id="4_ioxfe"]
 
@@ -10,5 +11,6 @@ script = ExtResource("3_ioxfe")
 sprites = ExtResource("4_ioxfe")
 max_health = 7
 move_range = 3
+attack_sound = ExtResource("3_3722n")
 actions = Array[ExtResource("1_250c8")]([ExtResource("2_dj0kp")])
 metadata/_custom_type_script = "uid://d0tgudynvd5o7"

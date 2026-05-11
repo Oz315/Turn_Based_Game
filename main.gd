@@ -7,7 +7,8 @@ var level_list = [
 	"res://all_levels/level2.tscn",
 	"res://all_levels/level3.tscn",
 	"res://all_levels/level4.tscn",
-	"res://all_levels/level5.tscn"
+	"res://all_levels/level5.tscn",
+	"res://all_levels/level6.tscn"
 ]
 
 var in_level_transition = false
@@ -45,6 +46,8 @@ func load_level(level):
 	new_level.initialize()
 	$Camera2D.update_borders(new_level.get_level_borders())
 	await $HUD.fade_out()
+	if !$Music.playing:
+		$Music.play()
 	$HUD.update_turns(1, new_level.turn_limit)
 	SignalBus.reset_turns.emit()
 	$TurnQueue.player_turn()
@@ -90,4 +93,5 @@ func advance_level():
 	if current_level < level_list.size():
 		load_level(level_list[current_level])
 	else:
+		$Music.stop()
 		game_win()

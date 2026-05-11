@@ -107,8 +107,19 @@ offset_right = 275.0
 offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "If we want to have a final message like the intro, please just input text here
-and mess with the tween duration in the script"
+theme_override_fonts/font = ExtResource("1_1f66h")
+theme_override_font_sizes/font_size = 35
+text = "And with the beast finally slain, peace would inevitably come again.
+It wouldn't come quickly as the lands ravaged by Deathwing's rule still 
+need time to recover. But soon, it would and everyone would have you
+to thank.
+
+
+
+
+
+Thanks for playing our game."
+horizontal_alignment = 1
 
 [node name="Win" type="AudioStreamPlayer" parent="." unique_id=870825070]
 stream = ExtResource("3_nyypv")

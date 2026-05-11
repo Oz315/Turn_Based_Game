@@ -42,6 +42,7 @@ func _ready():
 	health_component.health = enemy_type.max_health
 	health_bar.max_value = enemy_type.max_health
 	health_bar.value = health_component.health
+	enemy_attack.stream = enemy_type.attack_sound
 	$AnimatedSprite2D.sprite_frames = enemy_type.sprites
 	$AnimatedSprite2D.play("static")
 
@@ -120,11 +121,8 @@ func play_next_attack(player: Player):
 	# just do what the hint last turn said we would do
 	if next_attack.validate(self, next_attack_target, level):
 		await next_attack.execute(self, next_attack_target, level)
-		
 		if !enemy_attack.playing:
 			enemy_attack.play()
-
-		await next_attack.execute(self, next_attack_target, level)
 
 	#var positions = next_attack.hint(self, level)
 	#for position in positions:

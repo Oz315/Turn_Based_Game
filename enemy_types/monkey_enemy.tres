@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="1_58bxf"]
 [ext_resource type="Resource" uid="uid://d2erah5l8nc2e" path="res://actions/basic_attack.tres" id="2_muytw"]
+[ext_resource type="AudioStream" uid="uid://c2ycmeh7174x" path="res://GameMusic/BasicAttack.ogg" id="3_2v30l"]
 [ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="3_ofmfd"]
 [ext_resource type="SpriteFrames" uid="uid://dxg4a2077r23t" path="res://PIXEL ART/monkey.tres" id="4_muytw"]
 
@@ -10,4 +11,5 @@ script = ExtResource("3_ofmfd")
 sprites = ExtResource("4_muytw")
 max_health = 5
 move_range = 5
+attack_sound = ExtResource("3_2v30l")
 metadata/_custom_type_script = "uid://d0tgudynvd5o7"

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://onj4cnrlqutm" path="res://hud.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cclxfhhjjd7ky" path="res://camera_2d.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://cbnyytx41532c" path="res://turn_queue.gd" id="3_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://cp7cu10mhg862" path="res://GameMusic/Mainmenumus.ogg" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=1108824690]
 script = ExtResource("1_1bvp3")
@@ -17,3 +18,8 @@ script = ExtResource("2_1bvp3")
 script = ExtResource("3_1bvp3")
 
 [node name="HUD" parent="." unique_id=2066656993 instance=ExtResource("1_ig7tw")]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2056585769]
+stream = ExtResource("5_lquwl")
+volume_db = -12.0
+autoplay = true

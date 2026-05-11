@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://clfx85k4vjoce" path="res://actions/action_types/turn_action.gd" id="1_sxph3"]
 [ext_resource type="Resource" uid="uid://bn5h3kqu77hvj" path="res://actions/big_attack.tres" id="2_1t666"]
+[ext_resource type="AudioStream" uid="uid://c2ycmeh7174x" path="res://GameMusic/BasicAttack.ogg" id="3_5x35h"]
 [ext_resource type="Script" uid="uid://d0tgudynvd5o7" path="res://enemy_types/enemy_types.gd" id="3_fkumn"]
 [ext_resource type="SpriteFrames" uid="uid://bx6w8ddm0u4pi" path="res://PIXEL ART/gorilla.tres" id="4_fkumn"]
 
 [resource]
 script = ExtResource("3_fkumn")
 sprites = ExtResource("4_fkumn")
+attack_sound = ExtResource("3_5x35h")
 actions = Array[ExtResource("1_sxph3")]([ExtResource("2_1t666")])
 metadata/_custom_type_script = "uid://d0tgudynvd5o7"

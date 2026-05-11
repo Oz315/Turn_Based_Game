@@ -9,7 +9,7 @@ func _ready():
 	await get_tree().create_timer(2.5).timeout
 	
 	var tween = create_tween()
-	tween.tween_property($FinalMessage, "visible_ratio", 1, 9.0)
+	tween.tween_property($FinalMessage, "visible_ratio", 1, 15.0)
 	await tween.finished
 	$Panel/Return.show()
 
